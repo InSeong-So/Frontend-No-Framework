@@ -6,6 +6,9 @@
   - 함수 호출과 this
   - 프로토타입과 프로토타입 체이닝
 
+<hr>
+<br>
+
 ## 함수 정의
 - 함수 생성 방법
   - 함수 선언문(function statement)
@@ -15,6 +18,8 @@
 ### 함수 리터럴
 - 자바스크립트에서는 함수도 일반 객체처럼 값으로 취급한다.
   - 그러므로 함수 리터럴을 이용해 함수를 생성할 수 있다.
+
+<br>
 
 ### 함수 선언문 방식으로 함수 생성하기
 - 함수 리터럴 선언 방식은 함수 선언문 방식의 형태와 같다.
@@ -29,6 +34,8 @@
     
     console.log(add(3,4));  // (출력값) 7
     ```
+
+<br>
 
 ### 함수 표현식 방식으로 함수 생성하기
 - 자바스크립트에서는 함수도 하나의 값으로 취급되므로 `일급 객체`라고 한다.
@@ -50,8 +57,6 @@
       - 익명 함수의 호출은 함수 호출 연산자 ( )를 붙여서 할 수 있다.
       - 함수 이름이 포함된 함수 표현식은 기명 함수 표현식이라고 한다.
 
-<br>
-
 - 기명 함수 표현식의 함수 호출 방법
     ```js
     var add = function sum(x, y) {
@@ -63,8 +68,6 @@
     ```
     - 함수 표현식에서 사용된 함수 이름은 외부 코드에서 접근이 불가능하므로 에러가 발생한다.
     - 함수 이름은 정의된 함수 내부에서 해당 함수를 재귀적으로 호출하거나 디버거 등에서 함수를 구분할 때 사용한다.
-
-<br>
 
 - 함수 표현식 방식으로 구현한 팩토리얼 함수
     ```js
@@ -79,6 +82,8 @@
     console.log(factorial(3)); // Uncaught ReferenceError: factorial is not defined 에러 발생
     ```
 
+<br>
+
 ### Function() 생성자 함수를 통한 함수 생성하기
 - 자바스크립트의 함수도 Function() 이라는 기본 내장 생성자 함수로부터 생성된 객체라고 볼 수 있다.
   - 문법 : `new Function (arg1, arg2, ..., argN, functionBody)`
@@ -88,6 +93,8 @@
     ```
     - arg1, arg2, ..., argN : 함수의 매개변수
     - functionBody : 함수가 호출될 때 실행될 코드를 포함한 문자열
+
+<br>
 
 ### 함수 호이스팅
 - 함수를 생성하는 3가지 방법에는 동작 방식이 약간씩 다르다.
@@ -121,6 +128,9 @@
 
 - 함수 호이스팅의 원인 자바스크립트의 변수 생성(Instantiation)과 초기화(Initialization)의 작업이 분리되어 진행되기 때문이다.
 
+<hr>
+<br>
+
 ## 함수 객체 : 함수도 객체다
 ### 자바스크립트에서는 함수도 객체다
 - 자바스크립트에서는 함수도 객체이므로 프로퍼티들을 가질 수 있다.
@@ -139,6 +149,8 @@
     ```
     - 함수 코드는 함수 객체의 [[Code]] 내부 프로퍼티에 저장된다.
     - 함수 객체의 프로퍼티를 동적으로 생성하고 접근할 수 있다.
+
+<br>
 
 ### 자바스크립트에서의 함수는 값으로 취급된다
 - 함수도 일반 객체처럼 취급될 수 있으므로 다음과 같은 동작이 가능하다.
@@ -165,35 +177,37 @@
 
 #### 함수 인자로 전달
 - 함수는 다른 함수의 인자로도 전달이 가능하다.
-    ```js
-    // 함수 표현식으로 foo() 함수 생성
-    var foo = function(func) {
-        func(); // 인자로 받은 func() 함수 호출
-    };
+  ```js
+  // 함수 표현식으로 foo() 함수 생성
+  var foo = function(func) {
+      func(); // 인자로 받은 func() 함수 호출
+  };
 
-    // foo() 함수 실행
-    foo(function() {
-        console.log('Function can be used as the argument.');
-    });
+  // foo() 함수 실행
+  foo(function() {
+      console.log('Function can be used as the argument.');
+  });
 
-    // (출력값) Function can be used as the argument.
-    ```
+  // (출력값) Function can be used as the argument.
+  ```
 
 #### 리턴값으로 활용
 - 함수는 다른 함수의 리턴값으로도 활용할 수 있다.
-    ```js
-    // 함수를 리턴하는 foo() 함수 정의
-    var foo = function() {
-        return function () {
-            console.log('this function is the return value.')
-        };
-    };
+  ```js
+  // 함수를 리턴하는 foo() 함수 정의
+  var foo = function() {
+      return function () {
+          console.log('this function is the return value.')
+      };
+  };
 
-    var bar = foo();
-    bar();
+  var bar = foo();
+  bar();
 
-    // (출력값) this function is the return value.
-    ```
+  // (출력값) this function is the return value.
+  ```
+
+<br>
 
 ### 함수 객체의 기본 프로퍼티
 - 함수는 일반 객체와는 다르게 추가로 `함수 객체만의 표준 프로퍼티`가 정의되어 있다.
@@ -221,4 +235,3 @@
 - prototype 프로퍼티
   - 모든 함수는 객체로서 prototype 프로퍼티를 가지고 있다.
   - 함수 객체의 prototype 프로퍼티는 모든 객체의 부모를 나타내는 내부 프로퍼티 `[[Prototype]]`과 다르다.
-
