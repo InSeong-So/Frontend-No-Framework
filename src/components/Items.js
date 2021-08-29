@@ -1,59 +1,78 @@
 import Component from "../core/Component.js";
 
 export default class Items extends Component {
+  get filteredItems() {
+    const { isFilter, items } = this.$state;
+    return items.filter(({ active }) => (isFilter === 1 && active) || (isFilter === 2 && !active) || isFilter === 0);
+  }
   setup() {
-    this.$state = { items: ['item1', 'item2'], maxId: 2 };
+    this.$state = {
+      isFilter: 0,
+      items: [
+        { seq: 1, contents: 'item1', active: false },
+        { seq: 2, contents: 'item2', active: true }
+      ]
+    };
   }
   template() {
-    const { items } = this.$state;
     return `
-    <button class='addBtn'>추가</button>
-      <ul>
-        ${items.map((item, index) => `
-          <li>
-            ${item}
-            <button class='delBtn' data-index=${index + 1}>삭제</button>
-          </li>
-        `).join('')}
-      </ul>
+      <header>
+        <input type='text' class='addItems' placeholder='추가할 아이템 내용을 입력해주세요.' />
+      </header>
+      <main>
+        <ul>
+          ${this.filteredItems.map(({ seq, contents, active }) => `
+            <li data-seq='${seq}'>
+              ${contents}
+              <button class='toggleBtn' style='color: ${active ? "#09F" : "#F09"}'>
+                ${active ? '활성' : '비활성'}
+              </button>
+              <button class='delBtn'>삭제</button>
+            </li>
+          `).join('')}
+        </ul>
+      </main>
+      <footer>
+        <button class='filterBtn' data-is-filter='0'>전체 보기</button>
+        <button class='filterBtn' data-is-filter='1'>활성 보기</button>
+        <button class='filterBtn' data-is-filter='2'>비활성 보기</button>
+      </footer>
     `
   }
-  /*
-  // 이벤트 버블링 처리 전
   setEvent() {
-    // 추가 버튼은 한개니까
-    this.$target.querySelector('.addBtn').addEventListener('click', () => {
-      const { items, maxId } = this.$state;
-      this.setState({ items: [...items, `item${maxId + 1}`], maxId: maxId + 1 });
+
+    this.addEvent('keyup', '.addItems', ({ key, target }) => {
+      if (key !== 'Enter') return;
+      const items = [...this.$state.items];
+      const seq = Math.max(...items.map(e => e.seq)) + 1;
+      const contents = target.value;
+      const active = false;
+      this.setState({
+        // items: items.concat({ seq, contents, active }),
+        items: [
+          ...items,
+          { seq, contents, active }
+        ]
+      });
     });
 
-    // 삭제 버튼은 여러개니까
-    this.$target.querySelectorAll('.delBtn').forEach(deleteButton => {
-      // 이벤트 객체가 넘어오므로 구조 분해 할당 문법을 쓰면 target만 가져올 수 있다.
-      deleteButton.addEventListener('click', ({ target }) => {
-        // const { items } = this.$state;
-        const items = [...this.$state.items];
-        items.splice(target.dataset.index - 1, 1);
-        this.setState({ items });
-      });
-
-    })
-  }
-  */
-  // 이벤트 버블링 처리 후
-  setEvent() {
-    // 모든 이벤트를 this.$target에 등록하고, 조건문으로 분기시킨다.
-    this.$target.addEventListener('click', ({target}) => {
+    this.addEvent('click', '.delBtn', ({ target }) => {
       const items = [...this.$state.items];
+      const seq = Number(target.closest('[data-seq]').dataset.seq);
+      items.splice(target.dataset.index - 1, 1);
+      this.setState({ items });
+    });
 
-      if(target.classList.contains('addBtn')){
-        this.setState({ items: [...items, `item${maxId + 1}`], maxId: maxId + 1 });
-      }
+    this.addEvent('click', '.toggleBtn', ({ target }) => {
+      const items = [...this.$state.items];
+      const seq = Number(target.closest('[data-seq]').dataset.seq);
+      const index = items.findIndex(e => e.seq === seq);
+      items[index].active = !items[index].active;
+      this.setState({ items });
+    });
 
-      if(target.classList.contains('delBtn')){
-        items.splice(target.dataset.index - 1, 1);
-        this.setState({ items });
-      }
+    this.addEvent('click', '.filterBtn', ({ target }) => {
+      this.setState({ isFilter: Number(target.dataset.isFilter) });
     });
   }
 }
