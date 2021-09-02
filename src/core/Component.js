@@ -1,19 +1,25 @@
 export default class Component {
   $target;
   $state;
-  constructor($target) {
+  $props;
+  constructor($target, $props) {
     this.$target = $target;
+    // 프로퍼티 할당
+    this.$props = $props;
     this.setup();
     this.setEvent();
     this.render();
   }
   // 최초로 데이터 선언
   setup() { };
+  // render 이후에 실행할 기능
+  mounted() { };
   // 화면에 보여질 태그를 정의
   template() { return ''; }
   // 화면에 그린다
   render() {
     this.$target.innerHTML = this.template();
+    this.mounted(); // render 이후에 실행되야 하므로 호출해준다.
   }
   // 이벤트를 정의
   setEvent() { }
