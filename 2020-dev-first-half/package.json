@@ -1,0 +1,34 @@
+{
+  "name": "fe-assignment-lab-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "description": "This repository was created by Emily for Roto, Jeffrey and Lucas.",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest --config=jest.config.js",
+    "start": "http-server . -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InSeong-So/js-assignment.git"
+  },
+  "keywords": [
+    "programmers",
+    "test",
+    "gif"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InSeong-So/js-assignment/issues"
+  },
+  "homepage": "https://github.com/InSeong-So/js-assignment",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "babel-jest": "^25.1.0",
+    "http-server": "^0.12.0",
+    "jest": "^24.9.0"
+  }
+}
