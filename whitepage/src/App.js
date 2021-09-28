@@ -1,0 +1,109 @@
+// Object.defineProperty 백지복습
+export const func_01 = () => {
+  const state = { a: 10, b: 100 };
+
+  const stateKeys = Object.keys(state);
+
+  const observer = () => console.log(`state a + b : ${state.a + state.b}`);
+
+  for (let _key of stateKeys) {
+    let _value = state[_key];
+    Object.defineProperty(state, _key, {
+      get() {
+        return _value;
+      },
+      set(value) {
+        _value = value;
+        observer();
+      },
+    });
+  }
+
+  state.a = 20;
+  state.b = 200;
+
+  setTimeout(() => {
+    state.a = 1000;
+    state.b = 20000;
+  }, 1000);
+};
+
+// Object.definePropery 함수 확장하기
+export const func_02 = () => {
+  const state = { a: 10, b: 20 };
+  const stateKeys = Object.keys(state);
+  let currentObserver = null;
+  for (const _key of stateKeys) {
+    let _value = state[_key];
+    const observers = new Set();
+    Object.defineProperty(state, _key, {
+      get() {
+        if (currentObserver) observers.add(currentObserver);
+        console.log(observers);
+        return _value;
+      },
+      set(value) {
+        _value = value;
+        observers.forEach(observer => observer());
+      },
+    });
+  }
+
+  const plusCalculator = () => {
+    currentObserver = plusCalculator;
+    console.log(`state a + b : ${state.a + state.b}`);
+  };
+
+  const subtractCalculator = () => {
+    currentObserver = subtractCalculator;
+    console.log(`state a - b : ${state.a - state.b}`);
+  };
+
+  plusCalculator();
+  subtractCalculator();
+
+  state.a = 1000;
+  state.b = 50000;
+};
+
+// observe, observable 분리
+export const func_03 = () => {
+  let currentObserver = null;
+
+  const observe = fn => {
+    currentObserver = fn;
+    fn();
+    currentObserver = null;
+  };
+
+  const observable = obj => {
+    const keys = Object.keys(obj);
+
+    keys.forEach(key => {
+      let _value = obj[key];
+      let observers = new Set();
+      Object.defineProperty(obj, key, {
+        get() {
+          if (currentObserver) observers.add(currentObserver);
+          return _value;
+        },
+        set(value) {
+          _value = value;
+          observers.forEach(fn => fn());
+        },
+      });
+    });
+
+    return obj;
+  };
+
+  const state = observable({ a: 10, b: 20 });
+  observe(() => console.log(`a = ${state.a}`));
+  observe(() => console.log(`b = ${state.b}`));
+  observe(() => console.log(`a + b = ${state.a} + ${state.b}`));
+  observe(() => console.log(`a * b = ${state.a} + ${state.b}`));
+  observe(() => console.log(`a - b = ${state.a} + ${state.b}`));
+
+  state.a = 100;
+  state.b = 200;
+};
