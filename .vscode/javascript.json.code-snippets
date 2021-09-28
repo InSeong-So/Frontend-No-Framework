@@ -1,0 +1,46 @@
+{
+  "Javascript CodingTest Input": {
+    "scope": "javascript,typescript",
+    "prefix": "input",
+    "body": [
+      "const input = require('fs')",
+      "  .readFileSync('stdin')",
+      "  .toString()",
+      "  .trim()",
+      "  .split(require('os').EOL);",
+      ""
+    ],
+    "description": "Javascript boj input"
+  },
+  "Javascript CodingTest Comment": {
+    "scope": "javascript,typescript",
+    "prefix": "jst",
+    "body": [
+      "/* 테스트 케이스 정의 */",
+      "describe('${TM_FILENAME_BASE/(.*)\\..+$/$1/}', () => {",
+      "  // 변수 입력하기",
+      "  const input =",
+      "    process.platform === 'linux'",
+      "      ? require('fs')",
+      "          .readFileSync('/dev/stdin')",
+      "          .toString()",
+      "          .trim()",
+      "          .split(require('os').EOL)",
+      "      : [];",
+      "  // 테스트 케이스명",
+      "  it('기본1', () => {",
+      "    console.log = jest.fn();",
+      "    // 함수 실행",
+      "    solution(input);",
+      "    // 결과",
+      "    const result = 0;",
+      "",
+      "    // 테스트 결과 정의",
+      "    expect(console.log).toHaveBeenCalledWith(result);",
+      "  });",
+      "});",
+      "",
+    ],
+    "description": "Javascript TestCase Snippets 1"
+  },
+}
