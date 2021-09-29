@@ -21,10 +21,10 @@ router.post('/login', async (req, res, next) => {
       })
       .exec((err, data) => {
         if (err) {
-          sendJSON(403, res, false, { users: [], msg: err });
+          res.status(403).json({ msg: err });
           return;
         }
-        sendJSON(201, res, true, { users: { ...data[0] } });
+        res.status(201).json({ ...data[0] });
       });
   } catch (error) {
     console.error(error);
@@ -32,12 +32,25 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+router.get('/check/:userId', (req, res, next) => {
+  getExistUser(req.query.userId)
+    .then(data => {
+      if (data) {
+        res.status(403).json({ msg: '이미 존재하는 아이디입니다.' });
+      }
+      res.status(201).json({ msg: '사용 가능한 아이디입니다.' });
+    })
+    .catch(error => {
+      console.log(error);
+      next(error);
+    });
+});
+
 router.post('/signup', (req, res, next) => {
   const j = getExistUser(req.body.userId);
   j.then(data => {
     if (data) {
-      console.log(data);
-      sendJSON(403, res, false, { msg: '이미 존재하는 아이디입니다.' });
+      res.status(403).json({ msg: '이미 존재하는 아이디입니다.' });
       return;
     }
     db.insert(
@@ -48,10 +61,10 @@ router.post('/signup', (req, res, next) => {
       },
       (err, data) => {
         if (err) {
-          sendJSON(403, res, false, { msg: err });
+          res.status(403).json({ msg: err });
           return;
         }
-        sendJSON(201, res, true, { users: { ...data[0] } });
+        res.status(201).json({ ...data[0] });
       },
     );
   }).catch(error => {
