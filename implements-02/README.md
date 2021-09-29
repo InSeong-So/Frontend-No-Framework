@@ -364,3 +364,46 @@ state.b = 200;
 > DOM(Component)에 적용한다.
 
 - 구조에 대한 생각은 접어두고, 기능만 구현한다.
+
+> 네 번째 커밋때 추가한 부분
+
+### 16. DOM을 Component로 추상화하기
+> [`implements-01`](https://github.com/InSeong-So/JS-Implement/tree/master/implements-01)을 참고한다.
+
+- 단, 컴포넌트를 생성할 때 옵저버를 참고하도록 설계한다.
+  - 중요한 부분은 setup(), 최초로 생성될 때 state를 관리하도록 옵저버를 설정하는 것이다.
+    ```js
+    setup() {
+      this._state = observable(this.initState());
+      observe(() => {
+        this.render();
+        this.setEvent();
+        this.mounted();
+      });
+    }
+    ```
+
+- 구현하고보니... [`implements-01`](https://github.com/InSeong-So/JS-Implement/tree/master/implements-01)의 setState()와 동일하게 작동하는것 같은데?
+  - 맞다! setState도 state가 변경될 때 render가 실행되니까.
+    ```js
+    setState(newState) {
+      this.state = { ...this.state, ...newState }
+      this.render();
+    }
+
+    render () {
+      this.innerHTML = this.template();
+    }
+    ```
+  - observer는 컴포넌트 상태에 사용하는 것보다 **중앙 집중식 저장소를 관리할 때 효과적**이다. 그럼 어떻게 중앙 집중식 저장소를 생성할까?
+
+- 우선 컴포넌트 외부에 상태를 만들어야 한다. 간단하게 Store를 생성하고 관리하자.
+  > 현재까지 만들고 동작은 되는데, 아래의 상황에서 에러가 난다. 에러 로그는 나오지 않지만...
+  > 1. 숫자가 아닌 문자가 들어간 경우
+  > 2. 0이 앞에 붙은 경우
+
+  - 만약 컴포넌트가 이렇게 소수가 아니라 여러 개였다면? 혹은 복잡한 컴포넌트였다면? 위의 형태는 store를 세 개의 컴포넌트가 참조하므로 store가 변경되었을 때 자동으로 렌더링 되게 작성한 것이다.
+  - 여기서 Flux 패턴을 이식하면 Redux/Vuex가 된다.
+
+- Flux는 단방향 데이터 흐름이 가장 큰 특징이다. `Dispatcher - Store - View - Action - Dispatcher`. [정리](https://github.com/InSeong-So/IT-Note/tree/master/chapter01-%EA%B0%9C%EB%B0%9C%EC%83%81%EC%8B%9D#book-flux-%ED%8C%A8%ED%84%B4%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94)를 참조하자.
+
