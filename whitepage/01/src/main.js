@@ -1,41 +1,52 @@
-class Component {
-  constructor(target, props) {
-    this._state = null;
-    this._props = null;
-    this.$target = null;
-    this.setup();
-  }
+import { Component } from './core/Component.js';
+import { COOKIE_NAME } from './utils/constants.js';
+import { setCookie, getCookie } from './utils/auth.js';
+import { LoginForm } from './components/LoginForm.js';
+import { SignupForm } from './components/SignupForm.js';
 
-  // 초기 셋업을 위한 함수
+(function () {
+  setCookie(COOKIE_NAME, 'loginUser0000', 1);
+})();
+
+class App extends Component {
   setup() {
-    this.render();
-    this.setEvent();
-    this.mounted();
+    this._state = {
+      // 쿠키 취득
+      cookie: getCookie(COOKIE_NAME),
+    };
   }
 
-  // state 변경하기
-  setState(newState) {
-    this._state = { ...this._state, newState };
-    this.render();
-  }
-
-  // 화면을 그리는 함수
-  render() {
-    this.$target.innerHTML = this.template();
-  }
-
-  // 화면에 그려지는 요소
   template() {
-    return '';
+    return `
+    <header>
+      <h2>환영합니다!</h2>
+    </header>
+    <main data-component="view-form">
+    </main>
+    `;
   }
 
-  // 이벤트 설정하기
-  setEvent() {}
+  mounted() {
+    const $viewForm = this.$target.querySelector(
+      "[data-component='view-form']",
+    );
+    const { cookie } = this._state;
+    cookie
+      ? new LoginForm($viewForm, {
+          login: this.login.bind(this),
+        })
+      : new SignupForm($viewForm);
+  }
 
-  // 자식 컴포넌트 마운트하기
-  mounted() {}
+  login(id, password) {
+    this.setState({
+      id,
+      password,
+    });
+    alert(`아이디 : ${id}\n비밀번호 : ${password}`);
+    setCookie(COOKIE_NAME, `${id}${password}`);
+    console.log(getCookie(COOKIE_NAME));
+  }
 }
-
-class App extends Component {}
 
 new App(document.querySelector('.app'));
