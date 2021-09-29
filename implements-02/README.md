@@ -365,6 +365,8 @@ state.b = 200;
 
 - 구조에 대한 생각은 접어두고, 기능만 구현한다.
 
+<br>
+
 > 네 번째 커밋때 추가한 부분
 
 ### 16. DOM을 Component로 추상화하기
@@ -406,6 +408,8 @@ state.b = 200;
   - 여기서 Flux 패턴을 이식하면 Redux/Vuex가 된다.
 
 - Flux는 단방향 데이터 흐름이 가장 큰 특징이다. `Dispatcher - Store - View - Action - Dispatcher`. [정리](https://github.com/InSeong-So/IT-Note/tree/master/chapter01-%EA%B0%9C%EB%B0%9C%EC%83%81%EC%8B%9D#book-flux-%ED%8C%A8%ED%84%B4%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94)를 참조하자.
+
+<br>
 
 > 다섯 번째 커밋때 추가한 부분
 
@@ -573,3 +577,63 @@ state.b = 200;
       }
     }
     ```
+
+<br>
+
+> 여섯 번째 커밋때 추가한 부분
+
+### 18. 최적화하기
+1. 변경된 상태가 이전 상태와 동일한 경우 : 다시 렌더링 되지 않도록 방어해야 한다.
+   - `src/core/observer.js`를 수정한다.
+
+2. 상태가 연속으로 변경되는 경우 : 브라우저가 DOM으로 렌더링 된다면 많은 부하가 걸리므로 `requestAnimationFrame`과 `debounce`를 이용해 한 프레임에 한 번만 렌더링 되도록 만들어준다. [참고](https://developer.mozilla.org/ko/docs/Web/API/Window/requestAnimationFrame)
+    > requestAnimationFrame은 1프레임에 1회 호출된다. 보통 1초에 60프레임이고, 1프레임은 약 16ms 정도이다.
+
+   - debounce 구현하기
+       ```js
+       const debounceFrame = (callback) => {
+         let currentCallback = -1;
+         return () => {
+           cancelAnimationFrame(currentCallback); // 현재 등록된 callback이 있을 경우 취소
+           currentCallback = requestAnimationFrame(callback); // 1프레임 뒤에 실행
+         }
+       };
+
+       debounceFrame(() => console.log(1));
+       debounceFrame(() => console.log(2));
+       debounceFrame(() => console.log(3));
+       debounceFrame(() => console.log(4));
+       debounceFrame(() => console.log(5)); // 실행
+       ```
+   - observer에 이식한다.
+      ```js
+      export const observe = fn => {
+        currentObserver = debouneFrame(fn);
+        fn();
+        currentObserver = null;
+      };
+      ```
+
+3. Proxy 사용하기
+> 최신 브라우저는 [Proxy](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Proxy)를 이용해 더욱 효과적으로 Observable을 구현할 수 있다.
+  ```js
+  export const observable = obj => {
+    
+    const observerMap = {};
+
+    return new Proxy(obj, {
+      get (target, name) {
+        observerMap[name] = observerMap[name] || new Set();
+        if (currentObserver) observerMap[name].add(currentObserver)
+        return target[name];
+      },
+      set (target, name, value) {
+        if (target[name] === value) return true;
+        if (JSON.stringify(target[name]) === JSON.stringify(value)) return true;
+        target[name] = value;
+        observerMap[name].forEach(fn => fn());
+        return true;
+      },
+    });
+  }
+  ```

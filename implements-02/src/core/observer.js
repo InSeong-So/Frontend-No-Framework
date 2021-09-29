@@ -1,7 +1,15 @@
 let currentObserver = null;
 
+const debouneFrame = callback => {
+  let currentCallback = -1;
+  return () => {
+    cancelAnimationFrame(currentCallback);
+    currentCallback = requestAnimationFrame(callback);
+  };
+};
+
 export const observe = fn => {
-  currentObserver = fn;
+  currentObserver = debouneFrame(fn);
   fn();
   currentObserver = null;
 };
@@ -17,6 +25,12 @@ export const observable = obj => {
         return _value;
       },
       set(value) {
+        // 원시값
+        if (_value === value) return;
+        // 객체
+        if (JSON.stringify(_value) === JSON.stringify(value)) return;
+        // ECMA set
+        // ECMA map
         _value = value;
         observer.forEach(fn => fn());
       },
