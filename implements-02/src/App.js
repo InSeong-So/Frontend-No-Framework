@@ -1,30 +1,23 @@
 import { Component } from './core/Component.js';
-import { store } from './store.js';
+import { setA, setB, store } from './store.js';
 
 const InputA = () => {
-  return `
-    <input id="stateA" value="${store.state.a}" size="5" />
-`;
+  return `<input id="stateA" value="${store.getState().a}" size="5" />`;
 };
 
 const InputB = () => {
-  return `
-    <input id="stateB" value="${store.state.b}" size="5" />
-`;
+  return `<input id="stateB" value="${store.getState().b}" size="5" />`;
 };
 
 const Calculator = () => {
-  return `
-    <p>a + b = ${+store.state.a + +store.state.b}</p>
-`;
+  return `<p>a + b = ${store.getState().a + store.getState().b}</p>`;
 };
-
 export class App extends Component {
   template() {
     return `
-    ${InputA()}
-    ${InputB()}
-    ${Calculator()}
+      ${InputA()}
+      ${InputB()}
+      ${Calculator()}
     `;
   }
 
@@ -32,11 +25,11 @@ export class App extends Component {
     const { $el } = this;
 
     $el.querySelector('#stateA').addEventListener('change', ({ target }) => {
-      store.setState({ a: Number(target.value) || 0 });
+      store.dispatch(setA(Number(target.value)));
     });
 
     $el.querySelector('#stateB').addEventListener('change', ({ target }) => {
-      store.setState({ b: Number(target.value) || 0 });
+      store.dispatch(setB(Number(target.value)));
     });
   }
 }

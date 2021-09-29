@@ -407,3 +407,169 @@ state.b = 200;
 
 - Flux는 단방향 데이터 흐름이 가장 큰 특징이다. `Dispatcher - Store - View - Action - Dispatcher`. [정리](https://github.com/InSeong-So/IT-Note/tree/master/chapter01-%EA%B0%9C%EB%B0%9C%EC%83%81%EC%8B%9D#book-flux-%ED%8C%A8%ED%84%B4%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80%EC%9A%94)를 참조하자.
 
+> 다섯 번째 커밋때 추가한 부분
+
+### 17. Redux 만들기
+> redux는 불변성을 중시하므로 옵저버 기능은 맞지 않긴 하다.
+
+- redux 공식 문서의 [코드 가이드](https://ko.redux.js.org/introduction/getting-started/)
+    ```js
+    import { createStore } from 'redux'
+
+    /**
+    * 이것이 (state, action) => state 형태의 순수 함수인 리듀서입니다.
+    * 리듀서는 액션이 어떻게 상태를 다음 상태로 변경하는지 서술합니다.
+    *
+    * 상태의 모양은 당신 마음대로입니다: 기본형(primitive)일수도, 배열일수도, 객체일수도,
+    * 심지어 Immutable.js 자료구조일수도 있습니다.  오직 중요한 점은 상태 객체를 변경해서는 안되며,
+    * 상태가 바뀐다면 새로운 객체를 반환해야 한다는 것입니다.
+    *
+    * 이 예제에서 우리는 `switch` 구문과 문자열을 썼지만,
+    * 여러분의 프로젝트에 맞게
+    * (함수 맵 같은) 다른 컨벤션을 따르셔도 좋습니다.
+    */
+    function counter(state = 0, action) {
+      switch (action.type) {
+        case 'INCREMENT':
+          return state + 1
+        case 'DECREMENT':
+          return state - 1
+        default:
+          return state
+      }
+    }
+
+    // 앱의 상태를 보관하는 Redux 저장소를 만듭니다.
+    // API로는 { subscribe, dispatch, getState }가 있습니다.
+    let store = createStore(counter)
+
+    // subscribe()를 이용해 상태 변화에 따라 UI가 변경되게 할 수 있습니다.
+    // 보통은 subscribe()를 직접 사용하기보다는 뷰 바인딩 라이브러리(예를 들어 React Redux)를 사용합니다.
+    // 하지만 현재 상태를 localStorage에 영속적으로 저장할 때도 편리합니다.
+
+    store.subscribe(() => console.log(store.getState()))
+
+    // 내부 상태를 변경하는 유일한 방법은 액션을 보내는 것뿐입니다.
+    // 액션은 직렬화할수도, 로깅할수도, 저장할수도 있으며 나중에 재실행할수도 있습니다.
+    store.dispatch({ type: 'INCREMENT' })
+    // 1
+    store.dispatch({ type: 'INCREMENT' })
+    // 2
+    store.dispatch({ type: 'DECREMENT' })
+    // 1
+    ```
+    - createStore가 반환하는 것은 subscribe, dispatch, getState 등의 메소드를 가진 객체이다.
+        ```js
+        const createStore = (reducer) => {
+          // ...
+          return { subscribe, dispatch, getState };
+        }
+        ```
+    - 인터페이스를 알았으니 구현을 시작해보자.
+
+- `scr/core/store.js`
+    ```js
+    import { observable } from './observer.js';
+
+    export const createStore = (reducer) => {
+      
+      // reducer가 실행될 때 반환하는 객체(state)를 observable로 만든다.
+      const state = observable(reducer());
+      
+      // getState는 실 state가 아닌 getter만 존재하는 사본 state를 반환한다.
+      const closneState = {};
+      Object.keys(state).forEach(key => {
+        Object.defineProperty(closneState, key, {
+          get: () => state[key],
+        })
+      });
+      
+      // dispatch로만 state의 값을 변경한다.
+      const dispatch = (action) => {
+        const newState = reducer(state, action);
+
+        for (const [key, value] of Object.entries(newState)) {
+          // state의 key가 아닐 경우 생략 
+          if ((state[key] ?? false)) continue;
+          state[key] = value;
+        }
+      }
+
+      const getState = () => closneState;
+      
+      // subscribe는 observe로 대체
+      return { getState, dispatch };
+
+    }
+    ```
+
+- 생성된 createStore로 `src/store.js`를 만든다.
+    ```js
+    import {createStore} from './core/Store.js';
+
+    // 초기 state의 값 정의
+    const initialState = {
+      a: 10,
+      b: 20,
+    };
+
+    // dispatch에서 사용될 type 정의
+    export const SET_A = 'SET_A';
+    export const SET_B = 'SET_B';
+
+    // reducer를 정의하여 store에 인자로 넘긴다.
+    export const store = createStore((state = initialState, action = {}) => {
+      // 불변성을 지키면서 객체 변경
+      switch (action.type) {
+        case SET_A :
+          return { ...state, a: action.payload }
+        case SET_B :
+          return { ...state, b: action.payload }
+        default:
+          return state;
+      }
+    });
+
+    // reducer에서 사용될 action을 정의, ActionCreator
+    export const setA = (payload) => ({ type: SET_A, payload });
+    export const setB = (payload) => ({ type: SET_B, payload });
+    ```
+
+- App.js가 사용하도록 정의 `src/App.js`
+    ```js
+    import { Component } from './core/Component.js';
+    import { setA, setB, store } from './store.js';
+
+    const InputA = () => {
+      return `<input id="stateA" value="${store.getState().a}" size="5" />`;
+    };
+
+    const InputB = () => {
+      return `<input id="stateB" value="${store.getState().b}" size="5" />`;
+    };
+
+    const Calculator = () => {
+      return `<p>a + b = ${store.getState().a + store.getState().b}</p>`;
+    };
+    export class App extends Component {
+      template() {
+        return `
+          ${InputA()}
+          ${InputB()}
+          ${Calculator()}
+        `;
+      }
+
+      setEvent() {
+        const { $el } = this;
+        // commit을 통해서 값 변경
+        $el.querySelector('#stateA').addEventListener('change', ({ target }) => {
+          store.dispatch(setA(Number(target.value)));
+        });
+
+        $el.querySelector('#stateB').addEventListener('change', ({ target }) => {
+          store.dispatch(setB(Number(target.value)));
+        });
+      }
+    }
+    ```

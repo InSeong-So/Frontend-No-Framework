@@ -1,4 +1,4 @@
-import { observe } from './observer.js';
+import { observable, observe } from './observer.js';
 
 export class Component {
   constructor(el, props) {
