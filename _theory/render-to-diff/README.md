@@ -1,3 +1,6 @@
+- [attributes](https://developer.mozilla.org/ko/docs/Web/API/Element/attributes)
+
+
 > 가상 DOM을 구현하고 조정(reconciliation)해봅시다.
 
 ## 가상 DOM이란?
