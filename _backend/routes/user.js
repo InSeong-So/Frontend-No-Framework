@@ -8,6 +8,26 @@ const db = new NeDB({
   autoload: true,
 });
 
+/**
+ * @swagger
+ *  /login:
+ *    post:
+ *      tags:
+ *      - login
+ *      description: 로그인
+ *      produces:
+ *      - application/json
+ *      parameters:
+ *        - in: query
+ *          name: category
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 카테고리
+ *      responses:
+ *       200:
+ *        description: 로그인 성공
+ */
 router.post('/login', async (req, res, next) => {
   try {
     await db
@@ -32,6 +52,26 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+/**
+ * @swagger
+ *  /check/:userId:
+ *    get:
+ *      tags:
+ *      - signup
+ *      description: 아이디 중복 체크
+ *      produces:
+ *      - application/json
+ *      parameters:
+ *        - in: query
+ *          name: category
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 카테고리
+ *      responses:
+ *       200:
+ *        description: 사용 가능한 아이디
+ */
 router.get('/check/:userId', (req, res, next) => {
   getExistUser(req.query.userId)
     .then(data => {
@@ -46,6 +86,26 @@ router.get('/check/:userId', (req, res, next) => {
     });
 });
 
+/**
+ * @swagger
+ *  /signup:
+ *    post:
+ *      tags:
+ *      - signup
+ *      description: 회원가입
+ *      produces:
+ *      - application/json
+ *      parameters:
+ *        - in: query
+ *          name: category
+ *          required: false
+ *          schema:
+ *            type: integer
+ *            description: 카테고리
+ *      responses:
+ *       200:
+ *        description: 회원가입 완료
+ */
 router.post('/signup', (req, res, next) => {
   const j = getExistUser(req.body.userId);
   j.then(data => {
