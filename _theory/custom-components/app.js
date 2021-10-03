@@ -1,10 +1,8 @@
-import {
-  WriteForm,
-  DEFAULT_SIZE,
-  DEFAULT_COLOR,
-} from './components/WriteForm.js';
+import WriteForm from './components/WriteForm.js';
+import IntroduceForm from './components/IntroduceForm.js';
 
 customElements.define('write-form', WriteForm);
+customElements.define('introduce-form', IntroduceForm);
 
 const items = [
   ['24', 'red'],
@@ -38,3 +36,11 @@ const init = event => {
 document.querySelector('.changeText').addEventListener('click', changeText);
 document.querySelector('.changeColor').addEventListener('click', changeColor);
 document.querySelector('.init').addEventListener('click', init);
+
+setTimeout(() => {
+  const introduceForm = document.querySelector('introduce-form');
+  introduceForm.setAttribute('lang', 'jp');
+  console.log(introduceForm._greeting.textContent);
+  // introduceForm.remove();
+  introduceForm._greeting.style.border = '3px solid black';
+}, 2000);

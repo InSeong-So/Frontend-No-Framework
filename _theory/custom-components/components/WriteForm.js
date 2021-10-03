@@ -4,7 +4,7 @@ export const DEFAULT_SIZE = '12';
 export const DEFAULT_COLOR = 'black';
 export const COLOR_GREEN = 'green';
 
-export class WriteForm extends HTMLElement {
+export default class WriteForm extends HTMLElement {
   constructor() {
     super();
   }
