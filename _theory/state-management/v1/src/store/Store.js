@@ -2,11 +2,16 @@ import Observer from '../core/Observer.js';
 
 export default class Store {
   constructor(params) {
-    this.actions = {};
-    this.mutations = {};
-    this.state = {};
-
     this.events = new Observer();
+    const self = this;
+    this.state = new Proxy(params.state || {}, {
+      set: function (state, key, value) {
+        state[key] = value;
+        console.log(`stateChagnes: ${key} : ${value}`);
+        self.events.publish('stateChange', self.state);
+        return true;
+      },
+    });
 
     if (Object.prototype.hasOwnProperty.call(params, 'actions')) {
       this.actions = params.actions;
@@ -15,16 +20,6 @@ export default class Store {
     if (Object.prototype.hasOwnProperty.call(params, 'mutations')) {
       this.mutations = params.mutations;
     }
-
-    const store = this;
-    this.state = new Proxy(params.state || {}, {
-      set: function (state, key, value) {
-        state[key] = value;
-        console.log(`stateChagnes: ${key} : ${value}`);
-        store.events.publish('stateChange', store.state);
-        return true;
-      },
-    });
   }
 
   dispatch(actionKey, payload) {
@@ -33,9 +28,7 @@ export default class Store {
       return false;
     }
 
-    console.groupCollapsed(`ACTION: ${actionKey}`);
     this.actions[actionKey](this, payload);
-    console.groupEnd();
 
     return true;
   }
@@ -46,8 +39,7 @@ export default class Store {
       return false;
     }
 
-    let newState = this.mutations[mutationKey](this.state, payload);
-
+    let newState = this.mutations[mutationKey]({ ...this.state }, payload);
     this.state = Object.assign(this.state, newState);
 
     return true;

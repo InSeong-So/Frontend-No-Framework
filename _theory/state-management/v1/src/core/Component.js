@@ -1,4 +1,4 @@
-import Store from '../store/Store.js';
+import store from '../store/index.js';
 
 const isChangedNode = (realNode, virtualNode) => {
   const realAttributes = realNode.attributes;
@@ -53,9 +53,8 @@ const renderDom = (target, realNode, virtualNode) => {
 
 export default class Component {
   constructor(element) {
-    if (store instanceof Store) {
-      store.events.subscribe('stateChange', () => this.render());
-    }
+    this.$store = store;
+    this.$store.events.subscribe('stateChange', () => this.render());
     this.$element = element;
     this.init();
     this.render();

@@ -1,5 +1,4 @@
 import Component from '../core/Component.js';
-import store from '../store/index.js';
 
 export default class Header extends Component {
   view() {
@@ -31,10 +30,9 @@ export default class Header extends Component {
   }
 
   registEvent() {
-    const $addItem = document.querySelector('.add-item');
-
-    $addItem.addEventListener('click', event => {
-      store.dispatch('addItem', {
+    this.$element.addEventListener('click', ({ target }) => {
+      if (!target.matches('.add-item')) return;
+      this.$store.dispatch('addItem', {
         type: getCheckboxValue(),
         todo: document.querySelector('[name="item-input"]').value,
         status: false,

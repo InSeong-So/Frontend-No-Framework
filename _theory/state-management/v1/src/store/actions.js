@@ -5,4 +5,7 @@ export default {
   clearItem(context, payload) {
     context.commit('clearItem', payload);
   },
+  completeItem(context, payload) {
+    context.commit('completeItem', payload);
+  },
 };
