@@ -14,7 +14,7 @@ export default class List extends Component {
         .map((item, index) => {
           return `
           <div>
-            <li>${item.type}</li>
+            <li class="todo-type">${item.type}</li>
             <li>${item.todo}</li>
             <li>${item.status}</li>
             <button>완료</button>

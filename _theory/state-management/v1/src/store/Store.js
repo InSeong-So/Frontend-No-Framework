@@ -7,7 +7,7 @@ export default class Store {
     this.state = new Proxy(params.state || {}, {
       set: function (state, key, value) {
         state[key] = value;
-        console.log(`stateChagnes: ${key} : ${value}`);
+        console.log(`stateChagnes: ${key} : ${typeof value}`);
         self.events.publish('stateChange', self.state);
         return true;
       },
