@@ -9,6 +9,6 @@ module.exports = {
       '<rootDir>/__mocks__/fileMock.js',
     '\\.(css|less)$': '<rootDir>/__mocks__/fileMock.js',
   },
-  testMatch: ['<rootDir>/**/*.(js|jsx|ts|tsx)'],
+  testMatch: ['<rootDir>/**/*.spec.(js|jsx|ts|tsx)'],
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };

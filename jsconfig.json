@@ -1,8 +1,11 @@
 {
+  "clearMocks": true,
+  "setupFilesAfterEnv": [
+    "regenerator-runtime/runtime"
+  ],
   "compilerOptions": {
     "baseUrl": "./",
-    "paths": {
-    }
+    "paths": {}
   },
   "exclude": [
     "node_modules",
