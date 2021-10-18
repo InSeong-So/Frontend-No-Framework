@@ -40,6 +40,38 @@
 
 <br>
 
+## 구현하기
+### 상태관리
+- [ ] vuex
+- [x] redux
+  - [ ] middleware 최적화
+- [x] redux-saga
+  - 이게 되네
+
+<br>
+
+### 컴포넌트
+- [ ] custom-element
+- [ ] observable
+- [ ] rendering function
+
+<br>
+
+### 빌드
+- [ ] webpack, code-splitting
+
+<br>
+
+### 라우팅
+- [ ] route module
+
+<br>
+
+### 클라이언트
+- [ ] http client module
+
+<br>
+
 ## `[`**참고**`]` 프로젝트에 들어가기 앞서
 
 <details><summary><strong>자세히보기</strong></summary>
