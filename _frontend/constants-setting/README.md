@@ -10,19 +10,19 @@ export const BACK_SERVER_URL = 'http://localhost:3000';
 
 // [ACTIONS]
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY'; // 카테고리 변경 이벤트(Only View)
-// Component to Dispatch
+// 서버 요청
 export const LOAD_MENU_REQUEST = 'LOAD_MENU_REQUEST';
 export const CREATE_MENU_REQUEST = 'CREATE_MENU_REQUEST';
 export const UPDATE_MENU_REQUEST = 'UPDATE_MENU_REQUEST';
 export const DELETE_MENU_REQUEST = 'DELETE_MENU_REQUEST';
 export const SOLDOUT_MENU_REQUEST = 'SOLDOUT_MENU_REQUEST';
-// Catch Action and transport database
+// 서버 응답이 성공일 때
 export const LOAD_MENU_SUCCESS = 'LOAD_MENU_SUCCESS';
 export const CREATE_MENU_SUCCESS = 'CREATE_MENU_SUCCESS';
 export const UPDATE_MENU_SUCCESS = 'UPDATE_MENU_SUCCESS';
 export const DELETE_MENU_SUCCESS = 'DELETE_MENU_SUCCESS';
 export const SOLDOUT_MENU_SUCCESS = 'SOLDOUT_MENU_SUCCESS';
-// Catch Error
+// 서버 응답이 실패일 때
 export const CREATE_MENU_FAILURE = 'CREATE_MENU_FAILURE';
 export const LOAD_MENU_FAILURE = 'LOAD_MENU_FAILURE';
 export const UPDATE_MENU_FAILURE = 'UPDATE_MENU_FAILURE';
@@ -40,6 +40,9 @@ export const LOCALSTORAGE_KEY = Object.freeze([
   'teavana',
   'desert',
 ]);
+
+// [DOM, EVENTS]
 export const ENTER_KEYCODE = 'Enter';
 export const ESC_KEYCODE = 'Escape';
+
 ```

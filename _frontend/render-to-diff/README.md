@@ -1,7 +1,7 @@
 > 가상 DOM을 구현하고 조정(reconciliation)해봅시다.
 
 # 가상 DOM이란?
-> [참조 : attributes](https://developer.mozilla.org/ko/docs/Web/API/Element/attributes)
+> [MDN: Attributes](https://developer.mozilla.org/ko/docs/Web/API/Element/attributes)
 
 React에 의해 유명해졌죠? 선언적 렌더링 엔진의 성능을 개선시키는 방법 중 하나입니다.
 

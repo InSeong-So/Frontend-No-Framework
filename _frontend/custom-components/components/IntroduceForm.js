@@ -1,5 +1,3 @@
-import { dispatchChangedDOM } from '../core/Render.js';
-
 export default class IntroduceForm extends HTMLElement {
   static get observedAttributes() {
     return ['lang'];
