@@ -63,6 +63,13 @@
 <br>
 
 ## 구현하기
+### DOM
+- [ ] 이벤트 핸들링(위임, 캡처링, 버블링) 최적화
+- [ ] 제어 최적화(선택자, 내용 삽입 등)
+- [x] [인성이 전용 렌더 함수](https://github.com/InSeong-So/No-Framework-VanillaJS/tree/master/_theory/render-to-diff)
+
+<br>
+
 ### 상태관리
 - [ ] vuex
 - [x] redux
@@ -75,7 +82,6 @@
 ### 컴포넌트
 - [ ] custom-element
 - [ ] observable
-- [x] [rendering function](https://github.com/InSeong-So/No-Framework-VanillaJS/tree/master/_theory/render-to-diff)
 
 <br>
 
