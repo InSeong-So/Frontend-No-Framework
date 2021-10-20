@@ -1,9 +1,8 @@
-- [attributes](https://developer.mozilla.org/ko/docs/Web/API/Element/attributes)
-
-
 > 가상 DOM을 구현하고 조정(reconciliation)해봅시다.
 
-## 가상 DOM이란?
+# 가상 DOM이란?
+> [참조 : attributes](https://developer.mozilla.org/ko/docs/Web/API/Element/attributes)
+
 React에 의해 유명해졌죠? 선언적 렌더링 엔진의 성능을 개선시키는 방법 중 하나입니다.
 
 UI 표현이 메모리에 유지되고 실제 DOM에 동기화되므로, 실제 DOM은 최소한의 작업을 수행하게 됩니다. 이 과정이 바로 조정(reconciliation)입니다.
@@ -15,47 +14,64 @@ UI 표현이 메모리에 유지되고 실제 DOM에 동기화되므로, 실제 
 2. 하나 이상의 속성이 수정되었나요?
 3. 노드에 자식(children)이 없고 textContent가 다른가요?
 
+<br>
+
 구현을 위해 하나하나 진행해볼까요?
-1. nodeCompare 함수를 작성합니다.
-    ```js
-    const nodeCompare = (target, real, virtual) => {};
-    ```
-    - 현재 DOM 노드인 target, 실제 DOM 노드인 real, 가상 DOM 노드인 virtual을 매개변수로 받습니다.
-    - 이제 함수 몸체(내부)를 작성합니다.
 
-2. 우선 새 노드가 정의되지 않았다면 실제 노드를 삭제합니다.
-    ```js
-    if(real && !virtual) real.remove();
-    ```
+<br>
 
-3. 실제 노드가 정의되진 않았지만 가상 노드가 존재하는 경우 부모 노드(target)에 추가합니다.
-    ```js
-    if(!real && virtual) target.appendChild(virtual);
-    ```
+## 구현 과정
+### nodeCompare 함수를 작성합니다.
+```js
+const nodeCompare = (target, real, virtual) => {};
+```
+- 현재 DOM 노드인 target, 실제 DOM 노드인 real, 가상 DOM 노드인 virtual을 매개변수로 받습니다.
+- 이제 함수 몸체(내부)를 작성합니다.
 
-4. 두 노드가 모두 정의되면 노드를 비교합니다.
-    ```js
-    if(isChangedNode(virtual, real)) real.replaceWith(virtual)
-    ```
-5. isChangedNode 함수는 아래 항목을 비교합니다(위에서 언급한 것들입니다).
-   1. 노드의 **속성 수**
-       ```js
-       // 1. 속성의 수
-       if(real.attributes.length !== virtual.length) return true;
-       ```
-   2. 노드의 **속성 종류**
-       ```js
-       // 2. 속성의 종류
-       const isDifferent = real.attributes.forEach(({name}) => real.getAttribute(name) !== virtual.getAttribute(name));
-       ```
-   3. **자식의 유무**
-       ```js
-       if(real.children.length === 0 && virtual.children.length === 0) return true;
-       ```
-   4. **내용**
-       ```js
-       if(real.textContent !== virtual.textContent) return true;
-       ```
+<br>
+
+### 우선 새 노드가 정의되지 않았다면 실제 노드를 삭제합니다.
+```js
+if(real && !virtual) real.remove();
+```
+
+<br>
+
+### 실제 노드가 정의되진 않았지만 가상 노드가 존재하는 경우 부모 노드(target)에 추가합니다.
+```js
+if(!real && virtual) target.appendChild(virtual);
+```
+
+<br>
+
+### 두 노드가 모두 정의되면 노드를 비교합니다.
+```js
+if(isChangedNode(virtual, real)) real.replaceWith(virtual)
+```
+
+<br>
+
+### isChangedNode 함수는 아래 항목을 비교합니다(위에서 언급한 것들입니다).
+1. 노드의 **속성 수**
+   ```js
+   // 1. 속성의 수
+   if(real.attributes.length !== virtual.length) return true;
+   ```
+2. 노드의 **속성 종류**
+   ```js
+   // 2. 속성의 종류
+   const isDifferent = real.attributes.forEach(({name}) => real.getAttribute(name) !== virtual.getAttribute(name));
+   ```
+3. **자식의 유무**
+   ```js
+   if(real.children.length === 0 && virtual.children.length === 0) return true;
+   ```
+4. **내용**
+   ```js
+   if(real.textContent !== virtual.textContent) return true;
+   ```
+
+<br>
 
 자, 이게 뼈대입니다. 각자가 작성할 애플리케이션에 맞는 diff 알고리즘을 작성하여 개선시킬 수 있지만, 문제에 직면하고 수정하는 것을 권장합니다.
 
