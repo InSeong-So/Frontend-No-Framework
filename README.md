@@ -62,6 +62,38 @@
 
 <br>
 
+## 구현하기
+### 상태관리
+- [ ] vuex
+- [x] redux
+  - [ ] middleware 최적화
+- [x] redux-saga
+  - 이게 되네
+
+<br>
+
+### 컴포넌트
+- [ ] custom-element
+- [ ] observable
+- [x] [rendering function](https://github.com/InSeong-So/No-Framework-VanillaJS/tree/master/_theory/render-to-diff)
+
+<br>
+
+### 빌드
+- [ ] webpack, code-splitting
+
+<br>
+
+### 라우팅
+- [ ] route module
+
+<br>
+
+### 클라이언트
+- [ ] http client module
+
+<br>
+
 ## 보일러 플레이트
 > 프로젝트 설계 시 나만의 구조 짜기
 
@@ -130,38 +162,6 @@
   - `DOM Control/EventHandler`, `Component/ShadowDOM/CustomElement`, `render/utils`는 글로벌하게 import할 필요 없이 src/components/root/Component에 구성하여 작업한다.
 - 상태 관리를 적극적으로 활용한다. flux를 기반으로 작성하지만, MVC로는 어떻게 구성할 수 있는지도 고려한다.
 - 상태 관리가 익숙해지면 불변성(Immutable)을 깨지 않고 작성한다.
-
-<br>
-
-## 구현하기
-### 상태관리
-- [ ] vuex
-- [x] redux
-  - [ ] middleware 최적화
-- [x] redux-saga
-  - 이게 되네
-
-<br>
-
-### 컴포넌트
-- [ ] custom-element
-- [ ] observable
-- [ ] rendering function
-
-<br>
-
-### 빌드
-- [ ] webpack, code-splitting
-
-<br>
-
-### 라우팅
-- [ ] route module
-
-<br>
-
-### 클라이언트
-- [ ] http client module
 
 <br>
 
