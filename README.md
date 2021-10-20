@@ -1,11 +1,84 @@
-> 바닐라 자바스크립트 기능을 구현하기 위한 저장소입니다.
+# 바닐라 자바스크립트로 프레임워크 따라가기
+> 바닐라 자바스크립트로 여러 기능을 구현하기 위한 저장소입니다.
 
 <br>
 
-대상은 각종 프론트엔드 라이브러리, 프레임워크입니다.
+해당 저장소는 모노레포로 구성하여 바닐라 자바스크립트를 적극적으로 활용합니다.
+
+구현 대상은 각종 프론트엔드 라이브러리, 프레임워크로, npm으로 설치 및 유지하는 것은 **Linter**, **Webpack**, **Test Library**입니다(간혹 `axios`를 사용할 순 있습니다).
 
 <br>
-<hr>
+
+## 보일러 플레이트
+> 프로젝트 설계 시 나만의 구조 짜기
+
+```
+├─__test__
+│       * 테스트 단위별 폴더로 구성하고
+|         파일 명은 *.spec.js
+│
+├─.vscode
+│       * 코드 스니펫 저장해두기
+|         javascript.json.code-snippets
+│
+├─asset
+│  │
+│  ├─css
+│  │    * 앱이 간단하다면 단일 파일, 복잡성이 높다면 분리
+│  │      app.css
+│  │      reset.css(또는 normalized.css)
+│  │
+│  ├─fonts
+│  │      * 폰트가 있는 경우
+│  │
+│  └─images
+│          404.png
+│          main.jpg
+│
+├─src
+│  │  App.js
+│  │
+│  ├─api
+│  │      * API 정보 구성, http-client도 같이 구성한다.
+│  │
+│  ├─components
+│  │      * 컴포넌트 구성, 컴포넌트는 store와 utils에 의존한다.
+│  │
+│  ├─constants
+│  │      * 상수로 각종 정보 구성하기
+│  │
+│  ├─events
+│  │      * 이벤트 함수 정의, 컴포넌트는 evetns에 의존한다.
+│  │
+│  ├─routes
+│  │      * 라우팅 관련 기능 정의
+│  │
+│  ├─store
+│  │      * 상태 관리 패턴 다루기
+│  │
+│  └─utils
+│         * 공통 함수 정의
+│
+│  .babelrc.js
+│  .eslintrc.js
+│  favicon.ico
+│  index.html
+│  index.js
+│  jest.config.js
+│  jsconfig.json
+│  package.json
+│  pages.pdf
+│  README.md
+│  webpack.config.js
+```
+
+- 공통적으로 ESLinter/Prettier를 적용한다.
+- 성질이 비슷하면 묶고, 의존성은 최대한 약하게 구성한다.
+  - `DOM Control/EventHandler`, `Component/ShadowDOM/CustomElement`, `render/utils`는 글로벌하게 import할 필요 없이 src/components/root/Component에 구성하여 작업한다.
+- 상태 관리를 적극적으로 활용한다. flux를 기반으로 작성하지만, MVC로는 어떻게 구성할 수 있는지도 고려한다.
+- 상태 관리가 익숙해지면 불변성(Immutable)을 깨지 않고 작성한다.
+
+<br>
 
 ## 바닐라 자바스크립트로 구현을 한다는 것은?
 1. 프레임워크는 무엇이고, 라이브러리는 무엇인지 명확하게 알아야 합니다.
@@ -19,24 +92,44 @@
    - DOM을 효과적으로 조작하기
    - 가상 DOM을 이용한 렌더링
    - diff 알고리즘 작성하기
+   - reflow, repaint, composite를 고려한 DOM 핸들링
+
+<br>
 
 2. DOM 이벤트 관리
    - 이벤트 버블링
    - 이벤트 캡처링
    - 이벤트 위임
-  
+
+<br>
+
 3. 컴포넌트 제어
    - 커스텀 엘리먼트 사용
    - 상태 관리하기
+
+<br>
 
 4. HTTP 클라이언트 구현
    - XmlHttpRequest
    - fetch API
    - Axios
 
+<br>
+
 5. 라우팅 제어
    - Fragment
    - History API
+
+<br>
+
+6. 비동기 함수의 효율적인 구성
+   - 에러 처리
+   - callback, Promise, async/await의 활용
+
+<br>
+
+1. 미들웨어 구성
+   - 어떻게 하면 특정 이벤트를 갈취할 수 있을까?
 
 <br>
 
