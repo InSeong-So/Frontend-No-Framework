@@ -5,7 +5,7 @@
   left: 0;
   position: fixed;
   display: flex;
-  /* background: white; */
+  background: white;
   z-index: 99;
   text-align: center;
 }
@@ -19,4 +19,8 @@
   width:100px;
   margin: auto;
   margin-top:20%;
+}
+
+.menu-image-button {
+  width:80px;
 }
