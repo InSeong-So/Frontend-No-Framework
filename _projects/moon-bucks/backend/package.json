@@ -1,0 +1,36 @@
+{
+  "name": "moonbucks-menu-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://imakerjun@github.com/blackcoffee-study/moonbucks-menu-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blackcoffee-study/moonbucks-menu-server/issues"
+  },
+  "homepage": "https://github.com/blackcoffee-study/moonbucks-menu-server#readme",
+  "dependencies": {
+    "connect-livereload": "^0.6.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "debug": "^2.6.9",
+    "express": "^4.16.4",
+    "http-errors": "^1.8.0",
+    "jade": "^1.11.0",
+    "livereload": "^0.9.3",
+    "morgan": "^1.9.1",
+    "nanoid": "^3.1.25",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}

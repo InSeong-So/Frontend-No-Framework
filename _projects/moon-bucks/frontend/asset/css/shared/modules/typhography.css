@@ -1,0 +1,165 @@
+/* Text Alignment */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/* Font Size */
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-6xl {
+  font-size: 3.75rem;
+  line-height: 1;
+}
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
+}
+
+/* Font Weight */
+.font-thin {
+  font-weight: 100;
+}
+.font-extralight {
+  font-weight: 200;
+}
+.font-light {
+  font-weight: 300;
+}
+.font-normal {
+  font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-extrabold {
+  font-weight: 800;
+}
+.font-black {
+  font-weight: 900;
+}
+
+/* Text Color */
+
+.text-transparent {
+  color: transparent;
+}
+
+.text-black {
+  color: black;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-gray-50 {
+  color: rgb(249, 250, 251);
+}
+
+.text-gray-100 {
+  color: rgb(249, 250, 251);
+}
+
+.text-gray-100 {
+  color: rgb(243, 244, 246);
+}
+
+.text-gray-200 {
+  color: rgb(229, 231, 235);
+}
+
+.text-gray-300 {
+  color: rgb(209, 213, 219);
+}
+
+.text-gray-400 {
+  color: rgb(156, 163, 175);
+}
+
+.text-gray-500 {
+  color: rgb(107, 114, 128);
+}
+
+.text-gray-600 {
+  color: rgb(75, 85, 99);
+}
+
+.text-gray-700 {
+  color: rgb(55, 65, 81);
+}
+
+.text-gray-800 {
+  color: rgb(31, 41, 55);
+}
+
+.text-gray-900 {
+  color: rgb(17, 24, 39);
+}

@@ -1,0 +1,59 @@
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-inner {
+  transition: top 0.25s ease;
+  max-width: 960px;
+  margin: auto;
+  overflow: auto;
+  background: #fff;
+  border-radius: 5px;
+  position: relative;
+}
+
+.modal-close {
+  margin: 20px;
+  width: 20px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+  background: no-repeat;
+  border: none;
+  padding: 0;
+}
+
+svg {
+  display: block;
+}
+
+.close-x {
+  stroke: gray;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+
+@media screen and (max-width: 768px) {
+  .modal-inner {
+    width: 90%;
+    height: 90%;
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,53 @@
+form .input-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+form .input-field {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: inherit;
+  width: 100%;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  background: #f1f5f9;
+}
+
+form .input-submit {
+  font-size: 1rem;
+  line-height: inherit;
+  cursor: pointer;
+  min-width: 90px;
+  height: auto;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+}
+
+form select {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: inherit;
+  width: 100%;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  background-color: #f1f5f9;
+  -webkit-appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
+    linear-gradient(135deg, gray 50%, transparent 50%),
+    radial-gradient(#fff 0%, transparent 0%);
+  background-position: calc(100% - 30px) calc(1em + 4px),
+    calc(100% - 25px) calc(1em + 4px), calc(100% - 0.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1.5em 1.5em;
+  background-repeat: no-repeat;
+}

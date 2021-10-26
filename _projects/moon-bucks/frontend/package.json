@@ -1,0 +1,29 @@
+{
+  "name": "moon-bucks",
+  "version": "1.0.0",
+  "description": "문벅스 카페 메뉴 앱 만들기",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InSeong-So/moonbucks-menu.git"
+  },
+  "keywords": [],
+  "author": "InSeong-So",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/InSeong-So/moonbucks-menu/issues"
+  },
+  "homepage": "https://github.com/InSeong-So/moonbucks-menu#readme",
+  "devDependencies": {
+    "@babel/core": "7.15.5",
+    "@babel/preset-env": "7.15.6",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.32.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "prettier": "2.4.0"
+  }
+}
