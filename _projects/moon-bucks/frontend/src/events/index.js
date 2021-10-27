@@ -8,7 +8,7 @@ export default () => {
       <div class="modal-content">
         <div class="modal-header">
           <span class="close">&times;</span>
-          <h2>Modal Header</h2>
+          <h2>메뉴 수정</h2>
         </div>
         <div class="modal-body">
           <form id="file-upload-form" class="uploader">
@@ -32,7 +32,7 @@ export default () => {
           </form>
         </div>
         <div class="modal-footer">
-          <h3>Modal Footer</h3>
+          <button class="btn btn-primary">등록</button>
         </div>
       </div>
     `;

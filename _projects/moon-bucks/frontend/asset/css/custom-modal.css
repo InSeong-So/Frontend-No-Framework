@@ -28,7 +28,7 @@
 }
 
 .close {
-  color: white;
+  color: black;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -43,7 +43,6 @@
 
 .modal-header {
   padding: 2px 16px;
-  background-color: #5cb85c;
   color: white;
 }
 
@@ -57,7 +56,6 @@
 
 .modal-footer {
   padding: 2px 16px;
-  background-color: #5cb85c;
   color: white;
 }
 
@@ -84,3 +82,195 @@
 .hidden {
   display:none;
 }
+
+.modal-header h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 26px;
+  line-height: 1;
+  color: #454cad;
+  margin-bottom: 0;
+}
+
+.uploader {
+  display: block;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+}
+.uploader label {
+  float: left;
+  clear: both;
+  width: 100%;
+  /* padding: 2rem 1.5rem; */
+  text-align: center;
+  background: #fff;
+  border-radius: 7px;
+  border: 3px solid #eee;
+  transition: all 0.2s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.uploader label:hover {
+  border-color: #454cad;
+}
+.uploader label.hover {
+  border: 3px solid #454cad;
+  box-shadow: inset 0 0 0 6px #eee;
+}
+.uploader label.hover #start i.fa {
+  /* transform: scale(0.8); */
+  opacity: 0.3;
+}
+.uploader #start {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.uploader #start.hidden {
+  display: none;
+}
+.uploader #start i.fa {
+  font-size: 50px;
+  margin-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+.uploader #response {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.uploader #response.hidden {
+  display: none;
+}
+.uploader #response #messages {
+  margin-bottom: 0.5rem;
+}
+.uploader #file-image {
+  display: inline;
+  margin: 0 auto 0.5rem auto;
+  width: auto;
+  height: auto;
+  max-width: 180px;
+}
+.uploader #file-image.hidden {
+  display: none;
+}
+.uploader #notimage {
+  display: block;
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.uploader #notimage.hidden {
+  display: none;
+}
+.uploader progress,
+.uploader .progress {
+  display: inline;
+  clear: both;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 180px;
+  height: 8px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #eee;
+  overflow: hidden;
+}
+.uploader .progress[value]::-webkit-progress-bar {
+  border-radius: 4px;
+  background-color: #eee;
+}
+.uploader .progress[value]::-webkit-progress-value {
+  background: linear-gradient(to right, #393f90 0%, #454cad 50%);
+  border-radius: 4px;
+}
+.uploader .progress[value]::-moz-progress-bar {
+  background: linear-gradient(to right, #393f90 0%, #454cad 50%);
+  border-radius: 4px;
+}
+.uploader input[type=file] {
+  display: none;
+}
+.uploader input[type=text] {
+  width: 100%;
+  padding: 0.5em 0;
+  margin: 0.5em 0;
+}
+.uploader div {
+  margin: 0.5rem 0 0.5rem 0;
+  color: #5f6982;
+}
+.uploader .btn {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
+  clear: both;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: initial;
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  padding: 0 1rem;
+  height: 36px;
+  line-height: 36px;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+  background: #454cad;
+  border-color: #454cad;
+  cursor: pointer;
+}
+
+.modal-footer {
+  text-align: center;
+}
+
+.modal-footer:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+.modal-footer button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height: 30px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.modal-footer button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.modal-footer button:before,.modal-footer button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.modal-footer button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.modal-footer button:hover:before,.modal-footer button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
