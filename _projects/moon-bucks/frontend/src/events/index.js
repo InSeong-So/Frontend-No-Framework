@@ -12,7 +12,7 @@ export default () => {
         </div>
         <div class="modal-body">
           <form id="file-upload-form" class="uploader">
-            <input type="text" name="file-name"/>
+            <input type="text" name="menu-edit-name"/>
             <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
             <label for="file-upload" id="file-drag">
               <img id="file-image" src="#" alt="Preview" class="hidden">
@@ -32,13 +32,14 @@ export default () => {
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary">등록</button>
+          <button class="edit-complete btn btn-primary">등록</button>
         </div>
       </div>
     `;
     document.body.appendChild($div);
     const $target = document.querySelector('#app');
     const $modal = document.querySelector('.myModal');
+    const $regist = document.querySelector('.edit-complete');
     const $close = document.querySelector('.close');
     const displayModal = event => {
       if (!(event.target.matches('.open') || event.target.matches('.close')))
@@ -47,11 +48,14 @@ export default () => {
     };
     $target.addEventListener('click', displayModal);
     $close.addEventListener('click', displayModal);
+    $regist.addEventListener('click', event => {
+      const $modalInput = document.querySelector('[name=menu-edit-name]');
+      console.log($modalInput);
+    });
     // File Upload
-    function ekUpload() {
+    function fileUpload() {
       function Init() {
         console.log('Upload Initialised');
-
         const fileSelect = document.getElementById('file-upload'),
           fileDrag = document.getElementById('file-drag');
         // submitButton = document.getElementById('submit-button');
@@ -191,7 +195,7 @@ export default () => {
         document.getElementById('file-drag').style.display = 'none';
       }
     }
-    ekUpload();
+    fileUpload();
   })();
 
   window.addEventListener('keydown', event => {

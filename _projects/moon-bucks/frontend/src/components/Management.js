@@ -77,8 +77,11 @@ export default class Management extends Component {
       const $span = this._utils.$sibling(target, 'li', 'span');
       const targetItemIndex = $span.getAttribute('index');
       if (target.matches('.menu-edit-button')) {
+        const $modalInput = this._utils.$('[name=menu-edit-name]');
         const targetItemText = $span.textContent.trim();
-        menuList.updatedItem(+targetItemIndex, targetItemText);
+        $modalInput.setAttribute('index', +targetItemIndex);
+        $modalInput.value = targetItemText;
+        // menuList.updatedItem(+targetItemIndex, targetItemText);
       } else if (target.matches('.menu-sold-out-button')) {
         const targetItemText = target.textContent.trim();
         menuList.soldOutItem(+targetItemIndex, targetItemText);
