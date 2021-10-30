@@ -1,7 +1,6 @@
 @import "./shared/index.css";
 @import "./ui/index.css";
-@import "./app.css";
-@import "./custom-modal.css";
+@import "./pages/index.css";
 
 html,
 body {
