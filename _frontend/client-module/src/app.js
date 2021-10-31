@@ -1,17 +1,27 @@
 export default class HTTPClient {
-  constructor(defaults) {
+  constructor(options, headers) {
+    this.options = {
+      baseURL: options.baseURL,
+      mode: options.mode || 'no-cors',
+      cache: options.cache || 'no-cache',
+      credentials: options.credentials || 'same-origin',
+      redirect: options.redirect || 'follow',
+      referrer: options.referrer || 'no-referrer',
+    };
     this.headers = {
-      baseURL: defaults.baseURL,
-      mode: defaults.mode || 'no-cors',
-      cache: defaults.cache || 'no-cache',
-      credentials: defaults.credentials || 'same-origin',
-      redirect: defaults.redirect || 'follow',
-      referrer: defaults.referrer || 'no-referrer',
+      'Content-Type': headers.type || 'application/json',
+      'Access-Control-Allow-Origin': headers.cors || '*',
     };
   }
 
+  /**
+   * 인스턴스 없이 호출 가능한 request 객체
+   *
+   * @param {*} params
+   * @returns
+   */
   async request(params) {
-    const { method = 'GET', url, headers = {}, body } = params;
+    const { method = 'GET', url, headers = this.headers, body } = params;
     const config = {
       method,
       headers: new Headers(headers),
@@ -20,8 +30,7 @@ export default class HTTPClient {
     if (body) {
       config.body = JSON.stringify(body);
     }
-
-    const response = await fetch(url, config);
+    const response = await fetch(`${this.options.baseURL}${url}`, config);
     return this.parseResponse(response);
   }
 
@@ -32,7 +41,7 @@ export default class HTTPClient {
     return { status, data };
   }
 
-  async getRequest(url, headers) {
+  async get(url, headers = this.headers) {
     return await this.request({
       url,
       headers,
@@ -40,7 +49,7 @@ export default class HTTPClient {
     }).data;
   }
 
-  async postRequest(url, body, headers) {
+  async post(url, headers = this.headers, body) {
     return await this.request({
       url,
       headers,
@@ -48,14 +57,14 @@ export default class HTTPClient {
       body,
     }).data;
   }
-  async putRequest(url, body, headers) {
+  async put(url, headers = this.headers) {
     return await this.request({
       url,
       headers,
       method: 'PUT',
     }).data;
   }
-  async patchRequest(url, body, headers) {
+  async patch(url, headers = this.headers, body) {
     return await this.request({
       url,
       headers,
@@ -64,7 +73,7 @@ export default class HTTPClient {
     }).data;
   }
 
-  async deleteRequest(url, headers) {
+  async delete(url, headers = this.headers) {
     return await this.request({
       url,
       headers,

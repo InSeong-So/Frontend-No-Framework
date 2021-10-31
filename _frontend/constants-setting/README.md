@@ -6,7 +6,7 @@
 ```js
 // [API & ROUTE]
 export const FRONT_SERVER_URL = 'http://localhost:5510';
-export const BACK_SERVER_URL = 'http://localhost:3000';
+export const BACK_MENU_SERVER_URL = 'http://localhost:3000';
 
 // [ACTIONS]
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY'; // 카테고리 변경 이벤트(Only View)
