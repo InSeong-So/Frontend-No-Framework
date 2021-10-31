@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "InSeong-So",
