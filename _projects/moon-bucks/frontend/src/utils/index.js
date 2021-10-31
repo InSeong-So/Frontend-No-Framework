@@ -1,3 +1,6 @@
+/**
+ * InSeong's Mixins
+ */
 export default {
   /**
    * 단일 요소 선택자

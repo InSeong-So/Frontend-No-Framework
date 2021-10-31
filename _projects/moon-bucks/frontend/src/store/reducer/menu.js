@@ -10,7 +10,7 @@ import {
   UPDATE_MENU_FAILURE,
   DELETE_MENU_FAILURE,
   SOLDOUT_MENU_FAILURE,
-} from '../constants/index.js';
+} from '../../constants/index.js';
 
 const initialState = {
   espresso: [],
@@ -24,7 +24,7 @@ const initialState = {
   isLoading: true,
 };
 
-const reducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_CATEGORY:
       return {
@@ -72,5 +72,3 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
-
-export default reducer;

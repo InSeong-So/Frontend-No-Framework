@@ -1,6 +1,13 @@
-import setGlobalEventHandler from './src/events/index.js';
-import App from './src/app.js';
+import './asset/css/index.css';
 
-new App(document.querySelector('#app'));
+import LoginPage from './src/pages/LoginPage.js';
+import CreateRouter from './src/routes/index.js';
+import MenuPage from './src/pages/MenuPage.js';
+// import setGlobalEventHandler from './src/events/index.js';
 
-setGlobalEventHandler();
+new CreateRouter()
+  .addRoute('/', MenuPage)
+  .addRoute('/login', LoginPage)
+  .start();
+
+// setGlobalEventHandler();

@@ -1,5 +1,5 @@
 import createStore from './createStore.js';
-import reducer from './reducer.js';
+import reducer from './reducer/index.js';
 import sagaWrapper from '../sagas/index.js';
 import { WORKING_MIDDLEWARE } from '../constants/index.js';
 

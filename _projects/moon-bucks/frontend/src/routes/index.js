@@ -1,21 +1,63 @@
-class Router {
+import {
+  DYNAMIC_ROUTE_REGEXP,
+  URL_REGEXP,
+  AUTH_USER,
+} from '../constants/index.js';
+
+export default class CreateRouter {
   constructor() {
     this.routers = {};
-    this._bindPopState();
+    this.target = document.body;
   }
 
-  init(path) {
+  initialRoute(path) {
     history.replaceState({ path: path }, null, path);
-    this.routers[path] && this.routers[path]();
+    if (path === '/' && !this.getAuth()) {
+      path = '/login';
+    }
+    this.routers[path] && this.routers[path].callback(this.target);
   }
 
-  route(path, callback) {
-    this.routers[path] = callback || function () {};
+  addRoute(path, callback) {
+    const params = [];
+
+    const parsedPath = path
+      .replace(DYNAMIC_ROUTE_REGEXP, (match, paramName) => {
+        params.push(paramName);
+        return URL_REGEXP;
+      })
+      .replace(/\//g, '\\/');
+
+    this.routers[path] = {
+      testRegExp: new RegExp(`^${parsedPath}$`),
+      callback,
+      params,
+    };
+
+    return this;
+  }
+
+  checkRoute() {}
+
+  getAuth() {
+    return JSON.parse(localStorage.getItem(AUTH_USER)) || null;
+  }
+
+  setAuth({ id, firstLoginTime }) {
+    const user = JSON.stringify({
+      user: { id, firstLoginTime, isLogout: false },
+    });
+    localStorage.setItem(AUTH_USER, user);
+  }
+
+  setNotFound(callback) {
+    callback();
+    return this;
   }
 
   go(path) {
-    history.pushState({ path: path }, null, path);
-    this.routers[path] && this.routers[path]();
+    history.pushState({ path }, null, path);
+    this.routers[path] && this.routers[path].callback(this.target);
   }
 
   forward() {
@@ -26,10 +68,16 @@ class Router {
     history.back();
   }
 
-  _bindPopState() {
+  start() {
+    this.initialRoute(location.pathname);
     window.addEventListener('popstate', e => {
       const path = e.state && e.state.path;
-      this.routers[path] && this.routers[path]();
+      this.routers[path] && this.routers[path].callback(this.target);
     });
+    // if (!this.getAuth()) {
+    //   this.initialRoute('/login');
+    // } else {
+    //   this.initialRoute('/menu');
+    // }
   }
 }
