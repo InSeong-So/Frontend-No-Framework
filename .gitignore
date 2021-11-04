@@ -102,6 +102,5 @@ dist
 
 # TernJS port file
 .tern-port
-package-lock.json
 category.md
 _projects/moon-bucks/frontend/public/
