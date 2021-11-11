@@ -29,7 +29,7 @@ export default class MenuList extends Component {
           </button>
           <button
             type="button"
-            class="bg-gray-50 text-gray-500 text-sm mr-1 menu-image-button menu-edit-button open"
+            class="bg-gray-50 text-gray-500 text-sm mr-1 menu-edit-button"
           >
             수정
           </button>
@@ -73,15 +73,15 @@ export default class MenuList extends Component {
    * @param {Text} text
    */
   updatedItem(index, text) {
-    // let updatedItemName = prompt('메뉴 이름을 수정하시겠어요?', text);
-    // if (this._utils.isInvalidationValue(updatedItemName)) return;
-    // const updatedItem = { ...this.items[index], name: updatedItemName };
-    // this._store.dispatch({
-    //   type: UPDATE_MENU_REQUEST,
-    //   category: this._category,
-    //   menuId: updatedItem.id,
-    //   data: updatedItemName,
-    // });
+    let updatedItemName = prompt('메뉴 이름을 수정하시겠어요?', text);
+    if (this._utils.isInvalidationValue(updatedItemName)) return;
+    const updatedItem = { ...this.items[index], name: updatedItemName };
+    this._store.dispatch({
+      type: UPDATE_MENU_REQUEST,
+      category: this._category,
+      menuId: updatedItem.id,
+      data: updatedItemName,
+    });
   }
 
   /**

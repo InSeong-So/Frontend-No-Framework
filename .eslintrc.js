@@ -5,10 +5,15 @@ module.exports = {
     jest: true,
     node: true, // 'module' is not defined. 에러가 발생하면 기입
   },
-  extends: ['eslint:recommended', 'prettier'],
-  plugins: ['prettier'],
+  extends: [
+    'eslint:recommended',
+    'prettier',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+  ],
+  plugins: ['prettier', '@typescript-eslint'],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
     ecmaVersion: 12,
     sourceType: 'module',
   },

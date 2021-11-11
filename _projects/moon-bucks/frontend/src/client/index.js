@@ -1,4 +1,3 @@
-import { BACK_USER_SERVER_URL } from '../constants/index.js';
 import HTTPClient from './HTTPClient.js';
 
 const httpClient = new HTTPClient({
@@ -14,24 +13,6 @@ const httpClient = new HTTPClient({
 });
 
 const http = {
-  async login(params) {
-    return await httpClient.post(`/login`, params, null, {
-      replaceURL: BACK_USER_SERVER_URL,
-      from: `Login is Failed`,
-    });
-  },
-  async checkId({ userId }) {
-    return await httpClient.get(`/check/${userId}`, null, {
-      replaceURL: BACK_USER_SERVER_URL,
-      from: `Login is Failed`,
-    });
-  },
-  async signup(params) {
-    return await httpClient.post(`/signup`, params, null, {
-      replaceURL: BACK_USER_SERVER_URL,
-      from: `Signup is Failed`,
-    });
-  },
   async load({ category }) {
     return await httpClient.get(`/api/category/${category}/menu`, null, {
       from: `Load "${category}" menu`,

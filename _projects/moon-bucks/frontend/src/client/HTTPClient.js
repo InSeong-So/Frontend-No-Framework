@@ -1,5 +1,5 @@
 import {
-  BACK_MENU_SERVER_URL,
+  BACK_SERVER_URL,
   LIMIT_DELAY_TWO_SECOND,
   GET,
   POST,
@@ -11,7 +11,7 @@ import HTTPError from './HTTPError.js';
 
 export default class HTTPClient {
   constructor(defaults) {
-    this.baseURL = BACK_MENU_SERVER_URL;
+    this.baseURL = BACK_SERVER_URL;
     this.config = {
       mode: 'same-origin', // no-cors, cors, *same-origin
       cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
