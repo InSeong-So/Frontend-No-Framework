@@ -22,4 +22,12 @@
       document.querySelector('#menu-toggle').removeClass('closeMenu');
     });
   });
+
+  // ['login', 'signup', 'profile', 'logout'].forEach(id => {
+  //   document.querySelector(`#${id}`).addEventListener('click', ({ target }) => {
+  //     location.replace(
+  //       `http://127.0.0.1:5500/_projects/PostApp/template/${target.id}.html`,
+  //     );
+  //   });
+  // });
 })();

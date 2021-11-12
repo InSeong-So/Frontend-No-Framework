@@ -1,4 +1,5 @@
 @import url('./pages/index.css');
+@import url('./ui/index.css');
 * {
   box-sizing: border-box;
   margin: 0;
@@ -32,7 +33,7 @@ header nav.navShadow {
   height: 90px;
 }
 
-header nav.navShadow #word-mark, header nav.navShadow #users{
+header nav.navShadow #word-mark, header nav.navShadow #users {
   opacity: 0;
 }
 
@@ -70,15 +71,15 @@ header nav.navShadow #word-mark, header nav.navShadow #users{
   transition: all 0.3s;
 }
 
-#users{
+#users {
   margin-left: 10px;
 }
 
-.fa, .fas{
+header .fa, header .fas {
   font-size: 30px;
 }
 
-.fa:hover, .fas:hover{
+.fa:hover, .fas:hover {
   cursor: pointer;
 }
 
@@ -202,11 +203,21 @@ header li a {
 }
 
 main {
-  margin-top: 120px;
+  margin-top: 140px;
 }
 
-main table {
-  border: 1px solid #ccc;
+main section .table-wrapper {
+  margin: 2rem;
+  padding: 1rem;
+  border: solid 1px black;
+  border-style: solid;
+  border-image: linear-gradient(to right, #99e9f2 0%, #4dabf7 100%);
+  border-image-slice: 1;
+  border-image-width: 5px;
+}
+
+main section table {
+  /* border: 1px solid #ccc; */
   border-collapse: collapse;
   margin: auto;
   padding: 0;
@@ -214,36 +225,47 @@ main table {
   table-layout: fixed;
 }
 
-main table caption {
+main section table caption {
+  font-weight: bold;
   font-size: 1.5em;
-  margin: .5em 0 .75em;
+  margin: 0 0 0.5em 0;
 }
 
-main table tr {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: .35em;
+main section table tr {
+  background-color: #e7f5ff;
+  /* border: 1px solid #ddd; */
+  padding: 0.5em;
 }
 
-main table th, main table td {
-  padding: .625em;
+main section table tr th, main section table tr td {
+  padding: 0.8rem;
   text-align: center;
+  font-weight: bold;
 }
 
-main table th {
-  font-size: .85em;
-  letter-spacing: .1em;
+main[data-navgiation="menu"] section table tr th:first-child, main[data-navgiation="menu"] section table tr td:first-child {
+  width: 60%;
+}
+
+main[data-navgiation="menu"] section table tr td:first-child {
+  text-align: left;
+}
+
+main section table tr th {
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  border-bottom: 2px solid #66d9e8;
 }
 
 @media screen and (max-width: 600px) {
-  main table {
+  main section table {
     border: 0;
   }
-  main table caption {
+  main section table caption {
     font-size: 1.3em;
   }
-  main table thead {
+  main section table thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -253,24 +275,32 @@ main table th {
     position: absolute;
     width: 1px;
   }
-  main table tr {
+  main section table tr {
     border-bottom: 3px solid #ddd;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: 0.625em;
   }
-  main table td {
-    border-bottom: 1px solid #ddd;
+  main section table tr td {
+    /* border-bottom: 1px solid #ddd; */
     display: block;
-    font-size: .8em;
+    font-size: 0.8em;
     text-align: right;
   }
-  main table td::before {
+  main section table tr td::before {
     content: attr(data-label);
     float: left;
     font-weight: bold;
     text-transform: uppercase;
   }
-  main table td:last-child {
+  main section table tr th:first-child,
+  main section table tr td:first-child,
+  main[data-navgiation="admin"] section table tr th:nth-last-child(-n+2) {
+    width: 100%;
+  }
+  main section table tr td:first-child {
+    text-align: right;
+  }
+  main section table tr td:last-child {
     border-bottom: 0;
   }
 }
