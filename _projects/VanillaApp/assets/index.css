@@ -20,7 +20,8 @@ header {
 header nav {
   width: 100vw;
   height: 120px;
-  background: #46b2f0;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(0, 212, 255, 1) 0%, rgba(49, 101, 177, 1) 100%);
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: fixed;
@@ -76,7 +77,7 @@ header nav.navShadow #word-mark, header nav.navShadow #users {
 }
 
 header .fa, header .fas {
-  font-size: 30px;
+  font-size: 1.3rem;
 }
 
 .fa:hover, .fas:hover {
@@ -216,7 +217,7 @@ main section .table-wrapper {
   border-image-width: 5px;
 }
 
-main section table {
+main section .table-wrapper table {
   /* border: 1px solid #ccc; */
   border-collapse: collapse;
   margin: auto;
@@ -225,33 +226,37 @@ main section table {
   table-layout: fixed;
 }
 
-main section table caption {
+main section .table-wrapper table caption {
   font-weight: bold;
   font-size: 1.5em;
   margin: 0 0 0.5em 0;
 }
 
-main section table tr {
+main section .table-wrapper table thead tr:first-child {
+  background-color: #cceaff;
+}
+
+main section .table-wrapper table tr {
   background-color: #e7f5ff;
   /* border: 1px solid #ddd; */
   padding: 0.5em;
 }
 
-main section table tr th, main section table tr td {
+main section .table-wrapper table tr th, main section .table-wrapper table tr td {
   padding: 0.8rem;
   text-align: center;
   font-weight: bold;
 }
 
-main[data-navgiation="menu"] section table tr th:first-child, main[data-navgiation="menu"] section table tr td:first-child {
+main[data-navgiation="menu"] section .table-wrapper table tr th:first-child, main[data-navgiation="menu"] section .table-wrapper table tr td:first-child {
   width: 60%;
 }
 
-main[data-navgiation="menu"] section table tr td:first-child {
+main[data-navgiation="menu"] section .table-wrapper table tr td:first-child {
   text-align: left;
 }
 
-main section table tr th {
+main section .table-wrapper table tr th {
   font-size: 1.1em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -259,13 +264,13 @@ main section table tr th {
 }
 
 @media screen and (max-width: 600px) {
-  main section table {
+  main section .table-wrapper table {
     border: 0;
   }
-  main section table caption {
+  main section .table-wrapper table caption {
     font-size: 1.3em;
   }
-  main section table thead {
+  main section .table-wrapper table thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -275,32 +280,30 @@ main section table tr th {
     position: absolute;
     width: 1px;
   }
-  main section table tr {
+  main section .table-wrapper table tr {
     border-bottom: 3px solid #ddd;
     display: block;
     margin-bottom: 0.625em;
   }
-  main section table tr td {
+  main section .table-wrapper table tr td {
     /* border-bottom: 1px solid #ddd; */
     display: block;
     font-size: 0.8em;
     text-align: right;
   }
-  main section table tr td::before {
+  main section .table-wrapper table tr td::before {
     content: attr(data-label);
     float: left;
     font-weight: bold;
     text-transform: uppercase;
   }
-  main section table tr th:first-child,
-  main section table tr td:first-child,
-  main[data-navgiation="admin"] section table tr th:nth-last-child(-n+2) {
+  main section .table-wrapper table tr th:first-child, main section .table-wrapper table tr td:first-child, main[data-navgiation="admin"] section .table-wrapper table tr th:nth-last-child(-n+2) {
     width: 100%;
   }
-  main section table tr td:first-child {
+  main section .table-wrapper table tr td:first-child {
     text-align: right;
   }
-  main section table tr td:last-child {
+  main section .table-wrapper table tr td:last-child {
     border-bottom: 0;
   }
 }

@@ -31,7 +31,7 @@
 .login-page .container button {
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #3165b1;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -46,7 +46,7 @@
 .login-page .container button:hover,
 .login-page .container button:active,
 .login-page .container button:focus {
-  background: #43A047;
+  background: #0081ff;
 }
 
 .login-page .container .message {
@@ -56,7 +56,8 @@
 }
 
 .login-page .container .message a {
-  color: #4CAF50;
+  color: #3165b1;
+  font-weight: bold;
   text-decoration: none;
 }
 
@@ -65,8 +66,8 @@
 }
 
 .login-wrapper {
-  background: #76b852;
-  background: linear-gradient(to left, #76b852, #8DC26F);
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(49,101,177,1) 100%);
   top: 0;
   bottom: 0;
   left: 0;
