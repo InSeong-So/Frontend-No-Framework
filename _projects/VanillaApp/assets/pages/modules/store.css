@@ -19,8 +19,8 @@ main[data-navgiation="store"] section {
 }
 
 #map {
-  width: 500px;
-  height: 500px;
+  width: 35rem;
+  height: 35rem;
   margin: auto;
 }
 
@@ -56,28 +56,112 @@ main[data-navgiation="store"] section {
   font-size: 20px;
 }
 
-/* Resize the wrap to see the search bar change! */
 main[data-navgiation="store"] .wrap {
-  width: 500px;
+  width: 70%;
   margin: auto;
-  margin-top: 3rem;
+  margin-bottom: 3rem;
   /* position: absolute; */
   /* top: 50%; */
   /* left: 50%; */
   /* transform: translate(-50%, -50%); */
 }
 
-@media screen and (max-width: 600px) {
-  section {
+.store-info-wrapper {
+  width: 70%;
+  height: 29.8rem;
+  margin: auto;
+  border-radius: 20px;
+  padding: 1.5rem;
+  /* box-shadow: 3px 3px 10px rgba(66, 135, 245, 1); */
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  overflow-y: scroll;
+}
+
+.store-card {
+  display: flex;
+  padding: 15px;
+  border: 1px solid #fefefe;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.store-card:nth-child(n+2) {
+  margin-top: 2rem;
+}
+
+.store-card-img {
+  margin-right: 20px;
+  border-radius: 10px;
+  width: 130px;
+  height: 130px;
+  background-image: url(https://tailwindcss.com/_next/static/media/sarah-dayan.a8ff3f1095a58085a82e3bb6aab12eb2.jpg);
+  background-size: cover;
+  background-position: center;
+  display: inline-block;
+}
+
+.store-card-content-title {
+  font-size: 1.3rem;
+  font-weight: bold;
+  height: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.store-card-content-address {
+  height: 30%;
+  display: flex;
+  align-items: center;
+}
+
+.store-card-content-tel::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f3cd";
+  margin-right: 0.5rem;
+}
+
+.store-card-content-tel {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.store-card-content-location::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f689";
+  margin-right: 0.5rem;
+}
+
+.store-card-content-location {
+  height: 20%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  main[data-navgiation="store"] section {
     width: 100%;
   }
-
-  #map {
-    width: 300px;
-    height: 300px;
+  main[data-navgiation="store"] .wrap {
+    width: 90%;
   }
+  .store-info-wrapper {
+    width: 90%;
+  }
+}
 
-  .wrap {
-    width: 300px;
+@media screen and (max-width: 600px) {
+  main[data-navgiation="store"] section:first-child {
+    display: none;
+  }
+  main[data-navgiation="store"] .wrap {
+    width: 90%;
+  }
+  .store-info-wrapper {
+    width: 90%;
   }
 }
