@@ -1,4 +1,4 @@
-main[data-navgiation="store"] {
+main[data-component="store"] {
   position: absolute;
   margin: auto;
   top: 120px;
@@ -7,7 +7,7 @@ main[data-navgiation="store"] {
   left: 0;
 }
 
-main[data-navgiation="store"] section {
+main[data-component="store"] section {
   float: left;
   display: flex;
   align-items: center;
@@ -56,7 +56,7 @@ main[data-navgiation="store"] section {
   font-size: 20px;
 }
 
-main[data-navgiation="store"] .wrap {
+main[data-component="store"] .wrap {
   width: 70%;
   margin: auto;
   margin-bottom: 3rem;
@@ -143,10 +143,10 @@ main[data-navgiation="store"] .wrap {
 }
 
 @media screen and (max-width: 767px) {
-  main[data-navgiation="store"] section {
+  main[data-component="store"] section {
     width: 100%;
   }
-  main[data-navgiation="store"] .wrap {
+  main[data-component="store"] .wrap {
     width: 90%;
   }
   .store-info-wrapper {
@@ -155,10 +155,10 @@ main[data-navgiation="store"] .wrap {
 }
 
 @media screen and (max-width: 600px) {
-  main[data-navgiation="store"] section:first-child {
+  main[data-component="store"] section:first-child {
     display: none;
   }
-  main[data-navgiation="store"] .wrap {
+  main[data-component="store"] .wrap {
     width: 90%;
   }
   .store-info-wrapper {

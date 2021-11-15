@@ -89,7 +89,7 @@
   left: 51px;
 }
 
-main[data-navgiation="admin"] section table tr th:nth-last-child(-n+2) {
+main[data-component="admin"] section table tr th:nth-last-child(-n+2) {
   width: 10%;
 }
 

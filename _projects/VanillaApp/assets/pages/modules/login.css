@@ -1,15 +1,20 @@
 .login-page {
   width: 360px;
-  padding: 8% 0 0;
+  padding: 0;
   margin: auto;
 }
 
 .login-page .container {
   position: relative;
+  top: calc(120px + 2rem);
+  bottom: 2rem;
+  overflow: hidden;
+  left: 0;
+  right: 0;
   z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: 0 auto;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -43,9 +48,7 @@
   border-radius: 30px;
 }
 
-.login-page .container button:hover,
-.login-page .container button:active,
-.login-page .container button:focus {
+.login-page .container button:hover, .login-page .container button:active, .login-page .container button:focus {
   background: #0081ff;
 }
 
@@ -66,8 +69,8 @@
 }
 
 .login-wrapper {
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 0%, rgba(49,101,177,1) 100%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(0, 212, 255, 1) 0%, rgba(49, 101, 177, 1) 100%);
   top: 0;
   bottom: 0;
   left: 0;
@@ -75,4 +78,12 @@
   position: absolute;
   overflow: hidden;
   z-index: 100;
+}
+
+.error-text {
+  color: red;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  text-align: left;
+  font-size: 0.8rem;
 }

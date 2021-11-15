@@ -248,11 +248,11 @@ main section .table-wrapper table tr th, main section .table-wrapper table tr td
   font-weight: bold;
 }
 
-main[data-navgiation="menu"] section .table-wrapper table tr th:first-child, main[data-navgiation="menu"] section .table-wrapper table tr td:first-child {
+main[data-component="menu"] section .table-wrapper table tr th:first-child, main[data-component="menu"] section .table-wrapper table tr td:first-child {
   width: 60%;
 }
 
-main[data-navgiation="menu"] section .table-wrapper table tr td:first-child {
+main[data-component="menu"] section .table-wrapper table tr td:first-child {
   text-align: left;
 }
 
@@ -297,7 +297,7 @@ main section .table-wrapper table tr th {
     font-weight: bold;
     text-transform: uppercase;
   }
-  main section .table-wrapper table tr th:first-child, main section .table-wrapper table tr td:first-child, main[data-navgiation="admin"] section .table-wrapper table tr th:nth-last-child(-n+2) {
+  main section .table-wrapper table tr th:first-child, main section .table-wrapper table tr td:first-child, main[data-component="admin"] section .table-wrapper table tr th:nth-last-child(-n+2) {
     width: 100%;
   }
   main section .table-wrapper table tr td:first-child {
