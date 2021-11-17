@@ -5,6 +5,84 @@ export default class MenuListComponent extends Component {
     super(element, props);
   }
 
+  initialized() {
+    this._categoryText = '콜드브루';
+    this._menus = [
+      {
+        name: '콜드 폼 콜드브루',
+        stock: 9,
+        prices: [
+          {
+            size: 'Tall(355ml)',
+            price: 5.8,
+          },
+          {
+            size: 'Grande(473ml)',
+            price: 6.3,
+          },
+          {
+            size: 'Venti(591ml)',
+            price: 6.8,
+          },
+        ],
+      },
+      {
+        name: '바닐라 크림 콜드 브루',
+        stock: 9,
+        prices: [
+          {
+            size: 'Tall(355ml)',
+            price: 5.5,
+          },
+          {
+            size: 'Grande(473ml)',
+            price: 6.0,
+          },
+          {
+            size: 'Venti(591ml)',
+            price: 6.5,
+          },
+        ],
+      },
+      {
+        name: '콜드 브루',
+        stock: 0,
+        prices: [
+          {
+            size: 'Tall(355ml)',
+            price: 4.5,
+          },
+          {
+            size: 'Grande(473ml)',
+            price: 5.0,
+          },
+          {
+            size: 'Venti(591ml)',
+            price: 5.5,
+          },
+        ],
+      },
+      {
+        name: '돌체 콜드브루',
+        stock: 0,
+        prices: [
+          {
+            size: 'Tall(355ml)',
+            price: 5.8,
+          },
+          {
+            size: 'Grande(473ml)',
+            price: 6.3,
+          },
+          {
+            size: 'Venti(591ml)',
+            price: 6.8,
+          },
+        ],
+      },
+    ];
+  }
+
   template() {
     return `
     <div class="table-wrapper">
@@ -13,58 +91,77 @@ export default class MenuListComponent extends Component {
           <tr>
             <th scope="col">카테고리</th>
             <th scope="col">메뉴명</th>
-            <th scope="col">Tall(355ml)</th>
-            <th scope="col">Grande(473ml)</th>
-            <th scope="col">Venti(591ml)</th>
+            <th scope="col">사이즈/가격</th>
             <th scope="col">재고</th>
             <th scope="col">수정</th>
             <th scope="col">삭제</th>
           </tr>
         </thead>
         <tbody>
+        ${this._menus
+          .map((menu, index) => {
+            const { prices } = menu;
+            return `
           <tr>
-            <td scope="row" data-label="카테고리">콜드브루</td>
-            <td data-label="메뉴명">콜드 폼 콜드브루</td>
-            <td data-label="Tall(355ml)">5.8</td>
-            <td data-label="Grande(473ml)">6.3</td>
-            <td data-label="Venti(591ml)">6.5</td>
-            <td data-label="재고">입고 | 품절 | 현보유</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
+            <td scope="row" data-label="카테고리">${this._categoryText}</td>
+            <td data-label="메뉴명">${menu.name}</td>
+            <td data-label="사이즈/가격">
+              ${prices
+                .map(({ size, price }) => {
+                  return `
+                  <div class="prices">
+                    <p>${size}</p>
+                    <p>${price}</p>
+                  </div>
+                  `;
+                })
+                .join('')}
+            </td>
+            <td data-label="재고">${menu.stock || '품절'}</td>
+            <td data-label="수정"><i class="fas fa-pen" index=${index}></i></td>
+            <td data-label="삭제"><i class="fas fa-eraser" index=${index}></i></td>
           </tr>
-          <tr>
-            <td scope="row" data-label="카테고리">콜드브루</td>
-            <td data-label="메뉴명">바닐라 크림 콜드 브루</td>
-            <td data-label="Tall(355ml)">5.5</td>
-            <td data-label="Grande(473ml)">6.0</td>
-            <td data-label="Venti(591ml)">6.5</td>
-            <td data-label="재고">입고 | 품절 | 현보유</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="카테고리">콜드브루</td>
-            <td data-label="메뉴명">콜드 브루</td>
-            <td data-label="Tall(355ml)">4.5</td>
-            <td data-label="Grande(473ml)">5.0</td>
-            <td data-label="Venti(591ml)">5.5</td>
-            <td data-label="재고">입고 | 품절 | 현보유</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="카테고리">콜드브루</td>
-            <td data-label="메뉴명">돌체 콜드브루</td>
-            <td data-label="Tall(355ml)">5.8</td>
-            <td data-label="Grande(473ml)">6.3</td>
-            <td data-label="Venti(591ml)">6.8</td>
-            <td data-label="재고">입고 | 품절 | 현보유</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-          </tr>
+          `;
+          })
+          .join('')}
         </tbody>
       </table>
     </div>
     `;
+  }
+
+  updatedItem(index, context) {
+    return this._menus.map((menu, i) => {
+      if (index === i) return context;
+      return menu;
+    });
+  }
+
+  removeItem(index) {
+    return this._menus.filter((menu, i) => {
+      if (index !== i) return true;
+    });
+  }
+
+  mount() {
+    const modal = document.querySelector('modal-popup');
+    modal.addEventListener('cancel', function () {
+      console.log('cancel event raised');
+    });
+    modal.addEventListener('ok', function () {
+      console.log('ok event raised');
+    });
+    this.utils.$('tbody').addEventListener('click', event => {
+      if (event.target.matches('.fa-pen')) {
+        const encodeItem = encodeURIComponent(
+          JSON.stringify({
+            ...this._menus[+event.target.getAttribute('index')],
+            purpose: 'menu',
+          }),
+        );
+        modal.visible = true;
+        modal.items = encodeItem;
+      }
+    });
   }
 }

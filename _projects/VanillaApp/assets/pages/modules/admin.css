@@ -4,6 +4,7 @@
 }
 
 /*Start | On-Off Button Design*/
+
 .button-onoff {
   position: relative;
   display: inline-block;
@@ -20,7 +21,7 @@
   position: relative;
   display: block;
   width: 80px;
-  height: 34px;
+  height: 35px;
   border-radius: 40px;
   background: #ccc;
   border: 1px solid #ccc;
@@ -89,14 +90,69 @@
   left: 51px;
 }
 
-main[data-component="admin"] section table tr th:nth-last-child(-n+2) {
-  width: 10%;
+main[data-component="admin"] section table tr {
+  font-size: 0.9em !important;
 }
 
-.menu-table,
-.user-table {
+main[data-component="admin"] section table tr th:nth-child(1) {
+  width: 15%;
+}
+
+main[data-component="admin"] section table tr th:nth-child(2) {
+  width: 25%;
+}
+
+main[data-component="admin"] section table tr td:nth-child(2) {
+  text-align: left;
+}
+
+main[data-component="admin"] section table tr th:nth-last-child(-n+3) {
+  width: 8%;
+}
+
+.menu-table, .user-table {
   margin: 30px auto;
   table-layout: fixed;
+}
+
+.menu-table .prices {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-table .prices p:first-child {
+  display: block;
+  width: 50%;
+  float: left;
+  text-align: left;
+  padding-left: 10%;
+}
+
+.menu-table .prices p:last-child {
+  width: 50%;
+  display: inline-block;
+  text-align: right;
+  padding-right: 10%;
+}
+
+@media screen and (max-width: 600px) {
+  main[data-component="admin"] section table tr td:nth-child(2) {
+    text-align: right;
+  }
+  .menu-table .prices {
+    margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+  }
+  .menu-table .prices p:first-child {
+    width: 40%;
+    float: left;
+    text-align: left;
+  }
+  .menu-table .prices p:last-child {
+    width: 40%;
+    text-align: right;
+  }
 }
 
 .user-table th {

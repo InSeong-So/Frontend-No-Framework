@@ -17,6 +17,7 @@ export default class AdminComponent extends Component {
       </div>
     </section>
     <section data-child-component></section>
+    <modal-popup title="Important!" items=""></modal-popup>
     `;
   }
 

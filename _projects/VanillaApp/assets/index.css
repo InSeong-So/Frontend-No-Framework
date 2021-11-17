@@ -245,7 +245,6 @@ main section .table-wrapper table tr {
 main section .table-wrapper table tr th, main section .table-wrapper table tr td {
   padding: 0.8rem;
   text-align: center;
-  font-weight: bold;
 }
 
 main[data-component="menu"] section .table-wrapper table tr th:first-child, main[data-component="menu"] section .table-wrapper table tr td:first-child {
@@ -257,7 +256,7 @@ main[data-component="menu"] section .table-wrapper table tr td:first-child {
 }
 
 main section .table-wrapper table tr th {
-  font-size: 1.1em;
+  font-size: 0.9em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border-bottom: 2px solid #66d9e8;
@@ -286,7 +285,6 @@ main section .table-wrapper table tr th {
     margin-bottom: 0.625em;
   }
   main section .table-wrapper table tr td {
-    /* border-bottom: 1px solid #ddd; */
     display: block;
     font-size: 0.8em;
     text-align: right;
@@ -294,8 +292,14 @@ main section .table-wrapper table tr th {
   main section .table-wrapper table tr td::before {
     content: attr(data-label);
     float: left;
-    font-weight: bold;
     text-transform: uppercase;
+  }
+  main section .table-wrapper table tr .prices::before {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+  main section .table-wrapper table tr .prices div p{
+    margin-bottom: 10px;
   }
   main section .table-wrapper table tr th:first-child, main section .table-wrapper table tr td:first-child, main[data-component="admin"] section .table-wrapper table tr th:nth-last-child(-n+2) {
     width: 100%;

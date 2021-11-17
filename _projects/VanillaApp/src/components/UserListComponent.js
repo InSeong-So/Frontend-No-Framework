@@ -5,6 +5,41 @@ export default class UserListComponent extends Component {
     super(element, props);
   }
 
+  initialized() {
+    this._users = [
+      {
+        username: '테스트1',
+        id: 'hannah_west@example.com',
+        createdAt: '2021. 11. 2',
+      },
+      {
+        username: '테스트2',
+        id: 'Edward@example.com',
+        createdAt: '2021. 11. 2',
+      },
+      {
+        username: '테스트3',
+        id: 'william_86@example.com',
+        createdAt: '2021. 11. 2',
+      },
+      {
+        username: '테스트4',
+        id: 'Doris6@example.com',
+        createdAt: '2021. 11. 2',
+      },
+      {
+        username: '테스트5',
+        id: 'sharon_91@example.com',
+        createdAt: '2021. 11. 2',
+      },
+      {
+        username: '테스트6',
+        id: 'andrew84@example.com',
+        createdAt: '2021. 11. 2',
+      },
+    ];
+  }
+
   template() {
     return `
     <div class="table-wrapper">
@@ -19,54 +54,20 @@ export default class UserListComponent extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td scope="row" data-label="이름">테스트1</td>
-            <td data-label="아이디">hannah_west@example.com</td>
-            <td data-label="생성일">2021. 11. 2</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="이름">테스트2</td>
-            <td data-label="아이디">Edward@example.com</td>
-            <td data-label="생성일">2021. 11. 2</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="이름">테스트3</td>
-            <td data-label="아이디">william_86@example.com</td>
-            <td data-label="생성일">2021. 11. 2</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="이름">테스트4</td>
-            <td data-label="아이디">Doris6@example.com</td>
-            <td data-label="생성일">2021. 11. 2</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="이름">테스트5</td>
-            <td data-label="아이디">sharon_91@example.com</td>
-            <td data-label="생성일">2021. 11. 2</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" data-label="이름">테스트6</td>
-            <td data-label="아이디">andrew84@example.com</td>
-            <td data-label="생성일">2021. 11. 2</td>
-            <td data-label="수정"><i class="fas fa-pen"></i></td>
-            <td data-label="삭제"><i class="fas fa-eraser"></i></td>
-            </td>
-          </tr>
+          ${this._users
+            .map((user, index) => {
+              return `
+            <tr key=${index}>
+              <td scope="row" data-label="이름">${user.username}</td>
+              <td data-label="아이디">${user.id}</td>
+              <td data-label="생성일">${user.createdAt}</td>
+              <td data-label="수정"><i class="fas fa-pen"></i></td>
+              <td data-label="삭제"><i class="fas fa-eraser"></i></td>
+              </td>
+            </tr>
+            `;
+            })
+            .join('')}
         </tbody>
       </table>
     </div>
