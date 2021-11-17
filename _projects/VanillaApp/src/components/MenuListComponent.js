@@ -10,7 +10,6 @@ export default class MenuListComponent extends Component {
     this._menus = [
       {
         name: '콜드 폼 콜드브루',
-        stock: 9,
         prices: [
           {
             size: 'Tall(355ml)',
@@ -25,10 +24,10 @@ export default class MenuListComponent extends Component {
             price: 6.8,
           },
         ],
+        stock: 9,
       },
       {
         name: '바닐라 크림 콜드 브루',
-        stock: 9,
         prices: [
           {
             size: 'Tall(355ml)',
@@ -43,10 +42,10 @@ export default class MenuListComponent extends Component {
             price: 6.5,
           },
         ],
+        stock: 9,
       },
       {
         name: '콜드 브루',
-        stock: 0,
         prices: [
           {
             size: 'Tall(355ml)',
@@ -61,10 +60,10 @@ export default class MenuListComponent extends Component {
             price: 5.5,
           },
         ],
+        stock: 0,
       },
       {
         name: '돌체 콜드브루',
-        stock: 0,
         prices: [
           {
             size: 'Tall(355ml)',
@@ -79,6 +78,7 @@ export default class MenuListComponent extends Component {
             price: 6.8,
           },
         ],
+        stock: 0,
       },
     ];
   }
@@ -99,12 +99,11 @@ export default class MenuListComponent extends Component {
         </thead>
         <tbody>
         ${this._menus
-          .map((menu, index) => {
-            const { prices } = menu;
+          .map(({ name, prices, stock }, index) => {
             return `
           <tr>
             <td scope="row" data-label="카테고리">${this._categoryText}</td>
-            <td data-label="메뉴명">${menu.name}</td>
+            <td data-label="메뉴명">${name}</td>
             <td data-label="사이즈/가격">
               ${prices
                 .map(({ size, price }) => {
@@ -117,7 +116,7 @@ export default class MenuListComponent extends Component {
                 })
                 .join('')}
             </td>
-            <td data-label="재고">${menu.stock || '품절'}</td>
+            <td data-label="재고">${stock || '품절'}</td>
             <td data-label="수정"><i class="fas fa-pen" index=${index}></i></td>
             <td data-label="삭제"><i class="fas fa-eraser" index=${index}></i></td>
           </tr>
@@ -144,24 +143,33 @@ export default class MenuListComponent extends Component {
   }
 
   mount() {
-    const modal = document.querySelector('modal-popup');
-    modal.addEventListener('cancel', function () {
-      console.log('cancel event raised');
-    });
-    modal.addEventListener('ok', function () {
-      console.log('ok event raised');
-    });
+    const $modal = this.utils.$('modal-popup');
+
     this.utils.$('tbody').addEventListener('click', event => {
       if (event.target.matches('.fa-pen')) {
+        const index = +event.target.getAttribute('index');
         const encodeItem = encodeURIComponent(
           JSON.stringify({
-            ...this._menus[+event.target.getAttribute('index')],
+            ...this._menus[index],
             purpose: 'menu',
           }),
         );
-        modal.visible = true;
-        modal.items = encodeItem;
+        $modal.visible = true;
+        $modal.title = this._categoryText;
+        $modal.index = index;
+        $modal.items = encodeItem;
       }
+    });
+
+    $modal.addEventListener('cancel', () => {
+      console.log('cancel event raised');
+    });
+
+    $modal.addEventListener('ok', () => {
+      const { items, index } = $modal.attributes;
+      const updatedItem = JSON.parse(decodeURIComponent(items.value));
+      this._menus[+index.value] = updatedItem;
+      this.render();
     });
   }
 }

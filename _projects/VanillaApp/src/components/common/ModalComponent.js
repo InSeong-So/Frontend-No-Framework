@@ -27,6 +27,14 @@ export default class ModalComponent extends HTMLElement {
     this.setAttribute('items', value);
   }
 
+  get index() {
+    return this.getAttribute('index');
+  }
+
+  set index(value) {
+    this.setAttribute('index', value);
+  }
+
   constructor() {
     super();
   }
@@ -37,18 +45,10 @@ export default class ModalComponent extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['visible', 'title', 'items'];
+    return ['visible', 'title', 'items', 'index'];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === 'title' && this.shadowRoot) {
-      this.shadowRoot.querySelector('.title').textContent = newValue;
-    }
-    if (name === 'items' && this.shadowRoot) {
-      const items = JSON.parse(decodeURIComponent(newValue));
-      this.shadowRoot.querySelector('.content').innerHTML =
-        this._getContentForm(items);
-    }
     if (name === 'visible' && this.shadowRoot) {
       if (newValue === null) {
         this.shadowRoot.querySelector('.wrapper').classList.remove('visible');
@@ -57,6 +57,14 @@ export default class ModalComponent extends HTMLElement {
         this.shadowRoot.querySelector('.wrapper').classList.add('visible');
         this.dispatchEvent(new CustomEvent('open'));
       }
+    }
+    if (name === 'title' && this.shadowRoot) {
+      this.shadowRoot.querySelector('.title').textContent = newValue;
+    }
+    if (name === 'items' && this.shadowRoot) {
+      const items = JSON.parse(decodeURIComponent(newValue));
+      this.shadowRoot.querySelector('.content').innerHTML =
+        this._getContentForm(items);
     }
   }
 
@@ -89,24 +97,38 @@ export default class ModalComponent extends HTMLElement {
           .modal {
             font-family: Helvetica;
             font-size: 14px;
-            padding: 10px 10px 5px 10px;
+            padding: 15px;
             background-color: #82b0f5;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             border-radius: 20px;
-            min-width: 300px;
+            min-width: 400px;
           }
           
           .title {
             font-size: 18px;
+            text-align: center;
+            font-weight: bold;
           }
           
           .button-container {
             text-align: right;
           }
           
+          /* Chrome, Safari, Edge, Opera */
+          .step-none input::-webkit-outer-spin-button,
+          .step-none input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          
+          /* Firefox */
+          .step-none input[type=number] {
+            -moz-appearance: textfield;
+          }
+
           button {
             min-width: 80px;
             background-color: #848e97;
@@ -144,6 +166,7 @@ export default class ModalComponent extends HTMLElement {
             width: 100%;
             border: none;
             border-bottom: 1px solid #757575;
+            text-indent: 1em;
           }
 
           input:focus {
@@ -259,9 +282,14 @@ export default class ModalComponent extends HTMLElement {
           }
 
           /* ANIMATIONS ================ */
+          .table-wrapper span {
+            color: white;
+            font-size: 18px;
+            font-weight: normal;
+          }
 
           .table {
-            margin: 30px 0;
+            margin-top: 10px;
             width: 100%;
           }
           
@@ -272,7 +300,7 @@ export default class ModalComponent extends HTMLElement {
             vertical-align: top;
             color: #1D4A5A;
             font-weight: normal;
-            text-align: left;
+            text-align: center;
           }
           
           .table tbody tr td {
@@ -281,15 +309,22 @@ export default class ModalComponent extends HTMLElement {
             font-size: 14px;
             text-align: center;
           }
+          
+          .table tr input{
+            background: none;
+            font-size: 15px;
+            border: none;
+            border-bottom: 1px solid #757575;
+          }
         </style>
         <div class='${wrapperClass}'>
           <div class='modal'>
-            <span class='title'>${this.title}</span>
+            <p class='title'>${this.title}</p>
             <div class='content'>
             </div>
             <div class='button-container'>
-              <button class='cancel'>Cancel</button>
-              <button class='ok'>Okay</button>
+              <button class='cancel'>취소</button>
+              <button class='ok'>저장</button>
             </div>
           </div>
         </div>`;
@@ -304,32 +339,47 @@ export default class ModalComponent extends HTMLElement {
       return `
       <form>
         <div class="group">
-          <input type="text" required>
+          <input type="text" required name="name" value="${name}">
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>메뉴명</label>
         </div>
-        <div class="group">
-          <input type="text" required>
+        <div class="group table-wrapper">
+          <span>사이즈/가격</span>
+          <table class="table data">
+          <thead>
+            <tr>
+              ${priceTag
+                .map(
+                  tag => `
+                  <th>
+                    <input type="text" required name="size" value="${tag}">
+                  </th>`,
+                )
+                .join('')}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              ${prices
+                .map(
+                  ({ price }) => `
+                  <td>
+                    <input type="number" required step="0.1" name="price" value="${price}">
+                  </td>`,
+                )
+                .join('')}
+            </tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="group step-none">
+          <input type="number" required name="stock" value=${stock}>
           <span class="highlight"></span>
           <span class="bar"></span>
           <label>재고</label>
         </div>
       </form>
-      <table class="table data">
-        <thead>
-          <tr>
-            ${priceTag.map(tag => `<th>${tag}</th>`).join('')}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            ${prices
-              .map(({ price }) => `<td class="data">${price}</td>`)
-              .join('')}
-          </tr>
-        </tbody>
-      </table>
       `;
     }
 
@@ -338,9 +388,14 @@ export default class ModalComponent extends HTMLElement {
     `;
   }
 
+  _isNull(value) {
+    return value === '' || value === undefined || value === null ? true : false;
+  }
+
   _attachEventHandlers() {
     const $cancelButton = this.shadowRoot.querySelector('.cancel');
     const $okButton = this.shadowRoot.querySelector('.ok');
+
     const _modalCloseEvent = action => {
       this.dispatchEvent(new CustomEvent(action));
       this.removeAttribute('visible');
@@ -357,6 +412,27 @@ export default class ModalComponent extends HTMLElement {
     });
 
     $okButton.addEventListener('click', () => {
+      const updatedItem = {};
+      const prices = [];
+      let index = 0;
+      try {
+        this.shadowRoot
+          .querySelectorAll('[required]')
+          .forEach(({ name, value }) => {
+            if (this._isNull(value)) throw new Error('값이 입력되어야 합니다.');
+
+            if (name === 'size') prices.push({ size: value });
+            else if (name === 'price')
+              prices[index] = { ...prices[index++], [name]: +value };
+            else if (name === 'stock') updatedItem[name] = +value;
+            else updatedItem[name] = value;
+          });
+      } catch ({ message }) {
+        return alert(message);
+      }
+      this.items = encodeURIComponent(
+        JSON.stringify({ ...updatedItem, prices }),
+      );
       _modalCloseEvent('ok');
     });
   }

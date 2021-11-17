@@ -32,6 +32,26 @@ export default {
   },
 
   /**
+   * 단일 특정 대상 하위 요소 선택자
+   *
+   * @param {String} selector
+   * @returns
+   */
+  $_: (element, selector) => {
+    return element.querySelector(selector);
+  },
+
+  /**
+   * 복수 특정 대상 하위 요소 선택자
+   *
+   * @param {String} selector
+   * @returns
+   */
+  $$_: (element, selector) => {
+    return element.querySelectorAll(selector);
+  },
+
+  /**
    * 깊은 복사
    *
    * @param {Object} state
