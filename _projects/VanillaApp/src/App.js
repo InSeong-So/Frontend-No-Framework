@@ -6,6 +6,7 @@ import MenuComponent from './components/MenuComponent.js';
 import StoreComponent from './components/StoreComponent.js';
 import AdminComponent from './components/AdminComponent.js';
 import ModalComponent from './components/common/ModalComponent.js';
+import CoffeeComponent from './components/common/CoffeeComponent.js';
 
 class App extends Component {
   constructor(selector, props) {
@@ -47,6 +48,7 @@ class App extends Component {
   }
 }
 
+customElements.define('coffee-animation', CoffeeComponent);
 customElements.define('modal-popup', ModalComponent);
 
 export default {

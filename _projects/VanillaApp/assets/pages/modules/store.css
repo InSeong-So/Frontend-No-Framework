@@ -59,7 +59,7 @@ main[data-component="store"] section {
 main[data-component="store"] .wrap {
   width: 70%;
   margin: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   /* position: absolute; */
   /* top: 50%; */
   /* left: 50%; */
@@ -94,7 +94,7 @@ main[data-component="store"] .wrap {
   border-radius: 10px;
   width: 130px;
   height: 130px;
-  background-image: url(https://tailwindcss.com/_next/static/media/sarah-dayan.a8ff3f1095a58085a82e3bb6aab12eb2.jpg);
+  background-image: url(../../images/3986706-coffee-shop_112273.png);
   background-size: cover;
   background-position: center;
   display: inline-block;

@@ -159,6 +159,13 @@ export default class MenuListComponent extends Component {
         $modal.index = index;
         $modal.items = encodeItem;
       }
+
+      if (event.target.matches('.fa-eraser')) {
+        if (!confirm('정말 삭제하시겠습니까?')) return;
+        const index = +event.target.getAttribute('index');
+        this._menus = this._menus.filter((_, i) => i !== index);
+        this.render();
+      }
     });
 
     $modal.addEventListener('cancel', () => {
