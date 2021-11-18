@@ -159,14 +159,17 @@ export default class ModalComponent extends HTMLElement {
           }
 
           input {
+            color: cornsilk;
+            font-weight: bold;
             background-color: #82b0f5;
             font-size: 18px;
             padding: 10px 0;
             display: block;
             width: 100%;
             border: none;
-            border-bottom: 1px solid #757575;
+            border-bottom: 1px solid white;
             text-indent: 1em;
+            letter-spacing : 1px;
           }
 
           input:focus {
@@ -305,7 +308,7 @@ export default class ModalComponent extends HTMLElement {
           
           .table tbody tr td {
             padding: 10px;
-            background: #f2f2f2;
+            background: lightsteelblue;
             font-size: 14px;
             text-align: center;
           }
@@ -333,9 +336,10 @@ export default class ModalComponent extends HTMLElement {
     shadowRoot.appendChild(container);
   }
 
-  _getContentForm({ name, stock, prices, purpose }) {
-    const priceTag = prices.map(({ size }) => size);
-    if (purpose === 'menu') {
+  _getContentForm(items) {
+    if (items.purpose === 'menu') {
+      const { name, prices, stock } = items;
+      const priceTag = prices.map(({ size }) => size);
       return `
       <form>
         <div class="group">
@@ -383,8 +387,28 @@ export default class ModalComponent extends HTMLElement {
       `;
     }
 
+    const { username, id, authority } = items;
     return `
-
+    <form>
+      <div class="group">
+        <input type="text" required name="username" value="${username}">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>이름</label>
+      </div>
+      <div class="group step-none">
+        <input type="text" required name="id" value="${id}">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>아이디</label>
+      </div>
+      <div class="group step-none">
+        <input type="text" required name="authority" value="${authority}">
+        <span class="highlight"></span>
+        <span class="bar"></span>
+        <label>권한</label>
+      </div>
+    </form>
     `;
   }
 

@@ -304,6 +304,10 @@ main section .table-wrapper table tr th {
   main section .table-wrapper table tr th:first-child, main section .table-wrapper table tr td:first-child, main[data-component="admin"] section .table-wrapper table tr th:nth-last-child(-n+2) {
     width: 100%;
   }
+  main[data-component="menu"] section .table-wrapper table tr td:first-child {
+    text-align: right;
+    width: 100%;
+  }
   main section .table-wrapper table tr td:first-child {
     text-align: right;
   }

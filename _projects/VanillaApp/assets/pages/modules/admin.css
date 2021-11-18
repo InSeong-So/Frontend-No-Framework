@@ -135,26 +135,6 @@ main[data-component="admin"] section table tr th:nth-last-child(-n+3) {
   padding-right: 10%;
 }
 
-@media screen and (max-width: 600px) {
-  main[data-component="admin"] section table tr td:nth-child(2) {
-    text-align: right;
-  }
-  .menu-table .prices {
-    margin-top: 20px;
-    display: inline-block;
-    width: 100%;
-  }
-  .menu-table .prices p:first-child {
-    width: 40%;
-    float: left;
-    text-align: left;
-  }
-  .menu-table .prices p:last-child {
-    width: 40%;
-    text-align: right;
-  }
-}
-
 .user-table th {
   padding: 15px 30px;
 }
@@ -162,4 +142,52 @@ main[data-component="admin"] section table tr th:nth-last-child(-n+3) {
 .user-table th button {
   border: none;
   background-color: transparent !important;
+}
+
+main[data-component="admin"] section .user-table tr th:first-child {
+  width: 15%;
+}
+
+main[data-component="admin"] section .user-table tr th:nth-child(2) {
+  width: 20%;
+}
+
+main[data-component="admin"] section .user-table tr th:nth-child(3) {
+  width: 20%;
+}
+
+main[data-component="admin"] section .user-table tr td:nth-child(3) {
+  text-align: left;
+}
+
+main[data-component="admin"] section .user-table tr th:nth-child(4) {
+  width: 10%;
+}
+
+@media screen and (max-width: 600px) {
+  main[data-component="admin"] section table tr td:nth-child(2) {
+    text-align: right;
+  }
+
+  .menu-table .prices {
+    margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .menu-table .prices p:first-child {
+    width: 40%;
+    float: left;
+    text-align: left;
+  }
+
+  .menu-table .prices p:last-child {
+    width: 40%;
+    text-align: right;
+  }
+
+  main[data-component="admin"] section .user-table tr td:nth-child(3) {
+    text-align: right;
+    width: 100%;
+  }
 }

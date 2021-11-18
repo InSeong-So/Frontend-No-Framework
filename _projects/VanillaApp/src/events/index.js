@@ -3,7 +3,6 @@ import utils from '../utils/index.js';
 export const login = {
   // login
   toggleForm: ({ target }) => {
-    console.log(target);
     if (target.textContent === '돌아가기') {
       location.href = '#/';
     }
@@ -19,8 +18,6 @@ export const login = {
     const id = utils.$(`.${target}-id`).value;
     const password = utils.$(`.${target}-password`).value;
     const passwordCheck = utils.$(`.${target}-password-check`)?.value;
-
-    console.log(id, password, passwordCheck);
   },
 };
 

@@ -12,7 +12,7 @@ export default class AdminComponent extends Component {
     <section>
       <div class="management-onoff">
         <label class="button-onoff">
-          <input type="checkbox" name="toggle-button" data-onoff><span></span>
+          <input type="checkbox" name="toggle-button" data-onoff checked><span></span>
         </label>
       </div>
     </section>
@@ -22,7 +22,8 @@ export default class AdminComponent extends Component {
   }
 
   mount() {
-    new MenuListComponent('[data-child-component]');
+    new UserListComponent('[data-child-component]');
+    // new MenuListComponent('[data-child-component]');
     const $button = this.utils.$('[data-onoff]');
     $button.addEventListener('change', ({ target }) => {
       if (target.checked) {
