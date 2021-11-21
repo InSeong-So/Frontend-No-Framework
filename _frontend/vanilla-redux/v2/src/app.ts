@@ -1,5 +1,5 @@
 import * as fromStore from './store/index.js';
-import { renderTodos } from './utils';
+import { renderTodos } from './utils.js';
 
 const input = document.querySelector('input') as HTMLInputElement;
 const button = document.querySelector('button') as HTMLButtonElement;
@@ -28,6 +28,12 @@ button.addEventListener(
   },
   false,
 );
+
+const unsubscribe = store.subscribe((state: any) => {
+  renderTodos(state.todos.data);
+});
+
+destroy.addEventListener('click', unsubscribe, false);
 
 todoList.addEventListener('click', function (event) {
   const target = event.target as HTMLButtonElement;
