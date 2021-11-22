@@ -183,6 +183,22 @@ export default {
   getMaxLength: (target1 = 0, target2 = 1) => {
     return Math.max(target1, target2);
   },
+
+  /**
+   * 불변성 검증하기
+   *
+   * @param {*} isValid
+   * @param {*} message
+   * @param  {...any} args
+   * @returns
+   */
+  checkForInvariant: (isValid, message, ...args) => {
+    if (isValid) return;
+    let argIndex = 0;
+    const error = new Error(message.replace(/%s/g, () => args[argIndex++]));
+    error.name = '불변성을 위반하셨습니다.';
+    throw error;
+  },
 };
 
 /**

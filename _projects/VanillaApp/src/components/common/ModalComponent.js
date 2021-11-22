@@ -62,7 +62,7 @@ export default class ModalComponent extends HTMLElement {
       this.shadowRoot.querySelector('.title').textContent = newValue;
     }
     if (name === 'items' && this.shadowRoot) {
-      const items = JSON.parse(decodeURIComponent(newValue));
+      const items = newValue && JSON.parse(decodeURIComponent(newValue));
       this.shadowRoot.querySelector('.content').innerHTML =
         this._getContentForm(items);
     }
@@ -338,8 +338,11 @@ export default class ModalComponent extends HTMLElement {
 
   _getContentForm(items) {
     if (items.purpose === 'menu') {
-      const { name, prices, stock } = items;
-      const priceTag = prices.map(({ size }) => size);
+      const initPrices = Array.from({ length: 3 }, () => ({
+        size: '',
+        price: 0,
+      }));
+      const { name = '', prices = initPrices, stock = 0 } = items;
       return `
       <form>
         <div class="group">
@@ -353,11 +356,11 @@ export default class ModalComponent extends HTMLElement {
           <table class="table data">
           <thead>
             <tr>
-              ${priceTag
+              ${prices
                 .map(
-                  tag => `
+                  ({ size }) => `
                   <th>
-                    <input type="text" required name="size" value="${tag}">
+                    <input type="text" required name="size" value="${size}">
                   </th>`,
                 )
                 .join('')}
@@ -391,19 +394,19 @@ export default class ModalComponent extends HTMLElement {
     return `
     <form>
       <div class="group">
-        <input type="text" required name="username" value="${username}">
+        <input type="text" required name="username" value="${username || ''}">
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>이름</label>
       </div>
       <div class="group step-none">
-        <input type="text" required name="id" value="${id}">
+        <input type="text" required name="id" value="${id || ''}">
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>아이디</label>
       </div>
       <div class="group step-none">
-        <input type="text" required name="authority" value="${authority}">
+        <input type="text" required name="authority" value="${authority || ''}">
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>권한</label>

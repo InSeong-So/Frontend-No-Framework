@@ -95,7 +95,7 @@ export default class UserListComponent extends Component {
           }),
         );
         $modal.visible = true;
-        $modal.title = '사용자 설정';
+        $modal.title = '사용자 관리';
         $modal.index = index;
         $modal.items = encodeItem;
       }
@@ -108,9 +108,9 @@ export default class UserListComponent extends Component {
       }
     });
 
-    $modal.addEventListener('cancel', () => {
-      console.log('cancel event raised');
-    });
+    // $modal.addEventListener('cancel', () => {
+    //   console.log('cancel event raised');
+    // });
 
     $modal.addEventListener('ok', () => {
       const { items, index } = $modal.attributes;

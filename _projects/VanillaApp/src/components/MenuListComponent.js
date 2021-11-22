@@ -155,7 +155,7 @@ export default class MenuListComponent extends Component {
           }),
         );
         $modal.visible = true;
-        $modal.title = this._categoryText;
+        $modal.title = `${this._categoryText} 관리`;
         $modal.index = index;
         $modal.items = encodeItem;
       }
@@ -168,9 +168,9 @@ export default class MenuListComponent extends Component {
       }
     });
 
-    $modal.addEventListener('cancel', () => {
-      console.log('cancel event raised');
-    });
+    // $modal.addEventListener('cancel', () => {
+    //   console.log('cancel event raised');
+    // });
 
     $modal.addEventListener('ok', () => {
       const { items, index } = $modal.attributes;

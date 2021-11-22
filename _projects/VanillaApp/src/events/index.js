@@ -1,6 +1,7 @@
 import utils from '../utils/index.js';
+import { REGEXP_EMAIL, REGEXP_MINIMUM_EIGHT } from '../constants/util/index.js';
 
-export const login = {
+export const user = {
   // login
   toggleForm: ({ target }) => {
     if (target.textContent === '돌아가기') {

@@ -1,5 +1,5 @@
 import Component from './root/Component.js';
-import { login } from '../events/index.js';
+import { user } from '../events/index.js';
 
 export default class LoginComponent extends Component {
   template() {
@@ -49,9 +49,9 @@ export default class LoginComponent extends Component {
     this.utils.$('.container').addEventListener('click', event => {
       event.preventDefault();
       // 토글 폼
-      if (event.target.matches('.message a')) login.toggleForm(event);
+      if (event.target.matches('.message a')) user.toggleForm(event);
       // 로그인 액션
-      if (event.target.matches('.submit')) login.submitAction(event);
+      if (event.target.matches('.submit')) user.submitAction(event);
     });
   }
 }
