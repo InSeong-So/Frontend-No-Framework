@@ -5,7 +5,6 @@ import {
   has,
   is,
   isDraftable,
-  isDraft,
   isMap,
   shallowCopy,
   DRAFT_STATE,
@@ -59,14 +58,52 @@ export function createProxy(base, parent) {
 }
 
 const objectTraps = {
-  get,
+  get(state, prop) {
+    if (prop === DRAFT_STATE) return state;
+    let { drafts } = state;
+
+    // Check for existing draft in unmodified state.
+    if (!state.modified && has(drafts, prop)) {
+      return drafts[prop];
+    }
+
+    const value = source(state)[prop];
+    if (state.finalized || !isDraftable(value)) {
+      return value;
+    }
+
+    // Check for existing draft in modified state.
+    if (state.modified) {
+      // Assigned values are never drafted. This catches any drafts we created, too.
+      if (value !== peek(state.base, prop)) return value;
+      // Store drafts on the copy (when one exists).
+      drafts = state.copy;
+    }
+
+    return (drafts[prop] = createProxy(value, state));
+  },
   has(target, prop) {
     return prop in source(target);
   },
   ownKeys(target) {
     return Reflect.ownKeys(source(target));
   },
-  set,
+  set(state, prop, value) {
+    if (!state.modified) {
+      const baseValue = peek(state.base, prop);
+      // Optimize based on value's truthiness. Truthy values are guaranteed to
+      // never be undefined, so we can avoid the `in` operator. Lastly, truthy
+      // values may be drafts, but falsy values are never drafts.
+      const isUnchanged = value
+        ? is(baseValue, value) || value === state.drafts[prop]
+        : is(baseValue, value) && prop in state.base;
+      if (isUnchanged) return true;
+      markChanged(state);
+    }
+    state.assigned[prop] = true;
+    state.copy[prop] = value;
+    return true;
+  },
   deleteProperty,
   getOwnPropertyDescriptor,
   defineProperty() {
