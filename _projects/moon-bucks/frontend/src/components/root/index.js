@@ -21,15 +21,10 @@ const getThisDomChilds = target => {
 };
 
 const isChangedNode = (node1, node2) => {
-  if (isNotEquals(node1.attributes, node2.attributes)) return true;
-  if (isDifferenceAttrtibue(node1, node2)) return true;
+  if (isDifferenceAttributes(node1, node2)) return true;
   if (isNotEqualsLastContent(node1, node2)) return true;
 
   return false;
-};
-
-const isNotEquals = (target1, target2) => {
-  return target1 !== target2;
 };
 
 const isNotEqualsLastContent = (node1, node2) => {
@@ -39,13 +34,10 @@ const isNotEqualsLastContent = (node1, node2) => {
   return false;
 };
 
-const isDifferenceAttrtibue = (node1, node2) => {
-  return Array.from(node1.attributes).find(attribute => {
-    const { name } = attribute;
-    const real = node1.getAttribute(name);
-    const virtual = node2.getAttribute(name);
-    return real !== virtual;
-  });
+const isDifferenceAttributes = (real, virtual) => {
+  return !!Array.from(real.attributes).find(
+    ({ name }) => real.getAttribute(name) !== virtual.getAttribute(name),
+  );
 };
 
 const isOnlyExistReal = (node1, node2) => {
