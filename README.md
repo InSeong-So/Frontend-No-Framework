@@ -13,13 +13,14 @@
 1. 프레임워크는 무엇이고, 라이브러리는 무엇인지 명확하게 알아야 합니다.
 2. 제약사항과 기술적 부채를 어디서 접근하고 어떻게 해결해야 할까요?
 3. 개발 트렌드에 따른 구현 형태는 어떻게 될까요?
+4. 이 모든 걸 구현했다면 **타입스크립트**로 만듭시다.
 
 <br>
 
 ## 웹 프레임워크 구성을 따라가기
 1. 렌더링
    - DOM을 효과적으로 조작하기
-   - 가상 DOM을 이용한 렌더링
+   - 가상 DOM 구현하기
    - diff 알고리즘 작성하기
    - reflow, repaint, composite를 고려한 DOM 핸들링
 
@@ -41,7 +42,7 @@
 4. HTTP 클라이언트 구현
    - XmlHttpRequest
    - fetch API
-   - Axios
+   - *(옵션) Axios*
 
 <br>
 
@@ -53,7 +54,8 @@
 
 6. 비동기 함수의 효율적인 구성
    - 에러 처리
-   - callback, Promise, async/await의 활용
+   - callback, Promise, async/await 패턴
+   - generator, yield
 
 <br>
 
@@ -62,25 +64,37 @@
 
 <br>
 
+8. 디자인, 소프트웨어 아키텍처 패턴 적용
+   - MVC
+   - MVVM
+   - Flux
+   - *(옵션) 이벤트 기반 마이크로서비스 아키텍처 패턴*
+
+<br>
+
+9. 단위 테스트 적용
+   - jest
+   - cypress
+
+<br>
+
 ## 구현하기
 ### DOM
 - [ ] 이벤트 핸들링(위임, 캡처링, 버블링) 최적화
 - [ ] 제어 최적화(선택자, 내용 삽입 등)
-- [x] [인성이 전용 렌더 함수](https://github.com/InSeong-So/No-Framework-VanillaJS/tree/master/_theory/render-to-diff)
 
 <br>
 
 ### 상태관리
 - [ ] vuex
-- [x] redux
-  - [ ] middleware 최적화
-- [x] redux-saga
-  - 이게 되네
+- [ ] redux
+- [ ] redux-saga
 
 <br>
 
 ### 컴포넌트
 - [ ] custom-element
+- [ ] shadow-dom
 - [ ] observable
 
 <br>
@@ -97,6 +111,11 @@
 
 ### 클라이언트
 - [ ] http client module
+
+<br>
+
+### 패턴
+- [ ] 패턴의 장/단점에 따라 설계하고 구축하기
 
 <br>
 
@@ -165,7 +184,6 @@
 
 - 공통적으로 ESLinter/Prettier를 적용한다.
 - 성질이 비슷하면 묶고, 의존성은 최대한 약하게 구성한다.
-  - `DOM Control/EventHandler`, `Component/ShadowDOM/CustomElement`, `render/utils`는 글로벌하게 import할 필요 없이 src/components/root/Component에 구성하여 작업한다.
 - 상태 관리를 적극적으로 활용한다. flux를 기반으로 작성하지만, MVC로는 어떻게 구성할 수 있는지도 고려한다.
 - 상태 관리가 익숙해지면 불변성(Immutable)을 깨지 않고 작성한다.
 
@@ -407,6 +425,9 @@ TDD를 실천하면 첫째, 작은 코드는 대개 간단하고 실수할 가�
 
 ## 참조
 - 자바스크립트 : 자바스크립트 패턴과 디자인
+- 이벤트 기반 마이크로서비스 구축
+- 함수형 자바스크립트
+- 이펙티브 타입스크립트
 
 <br>
 
