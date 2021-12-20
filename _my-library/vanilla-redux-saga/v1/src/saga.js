@@ -20,9 +20,7 @@ export function* takeLatest(action, generator) {
 
 export async function makeRequest() {
   // return Promise.resolve('API Data');
-  const response = await fetch(
-    'http://localhost:3000/api/category/espresso/menu',
-  );
+  const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
   return await parse(response);
 }
 
@@ -43,7 +41,7 @@ export function* successWorker(effects) {
 // workers: perform requested task
 export function* firstWorker(effects) {
   const data = yield effects.call(makeRequest);
-
+  console.log(data);
   yield effects.put(successAction(data));
 }
 
