@@ -15,3 +15,7 @@ function* mySaga() {
 runSaga(store, mySaga);
 
 store.dispatch({ type: 'getUser' });
+
+setTimeout(() => {
+  store.dispatch({ type: 'getUser' });
+}, 2000);
