@@ -1,18 +1,17 @@
-import { takeEvery, select, call, put, runSaga } from './src/mySagaImpl.js'
-import { store, selectUserId } from './src/lib/store.js'
-import { getUser } from './src/lib/api.js'
+import { takeEvery, select, call, put, runSaga } from './src/mySagaImpl.js';
+import { store, selectUserId } from './src/lib/store.js';
+import { getUser } from './src/lib/api.js';
 
 function* userSaga() {
-  const userId = yield select(selectUserId)
-  const user = yield call(getUser, userId)
-  yield put({ type: 'getUserSuccess', payload: user })
+  const userId = yield select(selectUserId);
+  const user = yield call(getUser, userId);
+  yield put({ type: 'getUserSuccess', payload: user });
 }
 
 function* mySaga() {
-  yield* takeEvery('getUser', userSaga)
+  yield* takeEvery('getUser', userSaga);
 }
 
-runSaga(store, mySaga)
+runSaga(store, mySaga);
 
-// Try to run:
-store.dispatch({ type: 'getUser' })
+store.dispatch({ type: 'getUser' });
