@@ -20,23 +20,11 @@ export default class EventEmitter {
         `The "listener" argument must be of type Function. Received type ${typeof listener}`,
       );
 
-    this.on(type, _onceWrap(this, listener));
+    this.on(type, this._onceWrap(listener));
     return this;
   }
-}
 
-const _onceWrap = (target, listener) => {
-  const state = { fired: false, target, listener };
-  const wrapped = onceWrapper.bind(state);
-  wrapped.listener = listener;
-  return wrapped;
-};
-
-function onceWrapper(...args) {
-  if (this.fired) return;
-
-  this.fired = true;
-  return args.length === 0
-    ? this.listener.call(this.target)
-    : this.listener.apply(this.target, args);
+  _onceWrap(listener) {
+    return () => listener.apply(this);
+  }
 }

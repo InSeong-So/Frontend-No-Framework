@@ -1,0 +1,18 @@
+17
+96C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src132845389795820458 1
+104C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\.prettierrc132845001840000000 0
+111C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src\createStore.js132845726691231961 0
+105C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\package.json132845362004963337 0
+97C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\dist132845726693168142 1
+100C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src\lib132845389795870469 1
+103C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\index.html132845336842201965 0
+108C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\dist\index.html132845726527788547 0
+101C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\index.js132845700619678334 0
+110C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\package-lock.json132845341454960745 0
+106C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src\logger.js132845551862035189 0
+110C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src\lib\events.js132845726257821738 0
+110C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src\mySagaImpl.js132845700194854421 0
+107C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src\lib\api.js132845700749703730 0
+109C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\src\lib\store.js132845700837776549 0
+115C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\dist\index.38661719.js132845726693128141 0
+119C:\Users\goflv\Documents\gitStorage\No-Framework-VanillaJS\_my-library\vanilla-redux-saga\v5\dist\index.38661719.js.map132845726693158162 0

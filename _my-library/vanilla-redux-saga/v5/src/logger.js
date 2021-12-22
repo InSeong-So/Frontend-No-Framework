@@ -15,7 +15,7 @@ export const logEffect = effect => {
       break;
     case 'put':
       effectInfo = `${effect.action.type} ${JSON.stringify(
-        effect.action.payload,
+        effect.action.data,
       )}`;
       break;
     default:
