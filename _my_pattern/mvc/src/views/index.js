@@ -1,8 +1,8 @@
-import { $ } from '../utils/index.js';
+import utils from '../utils/index.js';
 
 export default class View {
   constructor() {
-    this.app = $('.app');
+    this.app = utils.$('.app');
 
     this.form = this.createElement('form');
     this.createInput({
