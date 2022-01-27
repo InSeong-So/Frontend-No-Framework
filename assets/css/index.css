@@ -1,0 +1,38 @@
+header {
+  padding: 1em !important;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+.container {
+  padding: 0 60px;
+}
+
+article {
+  margin: 1em 0 0 0;
+  padding: 0;
+}
+
+table {
+  margin-bottom: 0;
+}
+
+thead th {
+  text-align: center;
+  font-weight: 700;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+ul li:last-child {
+  margin-bottom: 0;
+}
+
+tbody tr:last-child th, tbody tr:last-child td{
+  border-bottom: none;
+}
