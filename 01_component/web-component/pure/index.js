@@ -77,10 +77,7 @@ add.onclick = function () {
 update.onclick = function () {
   // Randomly update pure's attributes
   pure.setAttribute('l', random(50, 200));
-  pure.setAttribute(
-    'c',
-    `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`,
-  );
+  pure.setAttribute('c', `rgb(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`);
 };
 
 remove.onclick = function () {
