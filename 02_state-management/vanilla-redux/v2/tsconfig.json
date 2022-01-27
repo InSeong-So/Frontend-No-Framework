@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    "module": "ES6",
+    // @ts-check와 같은 효과를 내는 옵션은 checkJs
+    "allowJs": true,
+    // tsc
+    "target": "ES5",
+    // 컴파일된 파일 출력 경로
+    "outDir": "./dist",
+    // 프로미스 베이스
+    "moduleResolution": "Node",
+    "lib": [
+      "ES2015",
+      "ES2017",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    // 타입이 정해져있지 않은 코드를 any라도 지정해야한다고 제한
+    "noImplicitAny": true,
+    // 1번째 인자 : 제공되는 types
+    // 2번째 인자 : 내가 만드는 types
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    // strict와 관련된 모든 속성이 true로 변경됨
+    "strict": true,
+  },
+  "include": [
+    "./src/**/*",
+    "./*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ] // 기본값
+}
