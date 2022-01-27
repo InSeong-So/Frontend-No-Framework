@@ -7,7 +7,7 @@ const virtualDOM = htmlParser(`
 <div class="d-flex justify-center mt-5 w-100">
   <div class="w-100">
     <header class="my-4">
-      <a href="/" class="text-black">
+      <a href="https://inseong-so.github.io/No-Framework-VanillaJS/" class="text-black">
         <h1 class="text-center font-bold">테스트앱</h1>
       </a>
       <nav class="d-flex justify-center flex-wrap"></nav>
