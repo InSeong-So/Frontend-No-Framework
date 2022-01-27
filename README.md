@@ -4,9 +4,9 @@
 <br>
 
 <div align=center>
-  <h2>
+  <h3>
     <a href="https://inseong-so.github.io/No-Framework-VanillaJS/">👀 눈으로 확인하기</a>
-  </h2>
+  </h3>
 </div>
 
 <br>
