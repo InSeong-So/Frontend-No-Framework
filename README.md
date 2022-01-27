@@ -1,195 +1,17 @@
-# 바닐라 자바스크립트로 프레임워크 따라가기
-> 바닐라 자바스크립트로 여러 기능을 구현하기 위한 저장소입니다.
+# 바닐라 자바스크립트로 여러 기능 구현하기
+> ✍️ 프레임워크, 라이브러리 없이 구현해봅시다!
 
 <br>
 
-해당 저장소는 모노레포로 구성하여 바닐라 자바스크립트를 적극적으로 활용합니다.
-
-구현 대상은 각종 프론트엔드 라이브러리, 프레임워크로, npm으로 설치 및 유지하는 것은 **Linter**, **Webpack**, **Test Library**입니다(간혹 `axios`를 사용할 순 있습니다).
-
-<br>
-
-## 바닐라 자바스크립트로 구현을 한다는 것은?
-1. 프레임워크는 무엇이고, 라이브러리는 무엇인지 명확하게 알아야 합니다.
-2. 제약사항과 기술적 부채를 어디서 접근하고 어떻게 해결해야 할까요?
-3. 개발 트렌드에 따른 구현 형태는 어떻게 될까요?
-4. 이 모든 걸 구현했다면 **타입스크립트**로 만듭시다.
+<div align=center>
+  <h2>
+    <a href="https://inseong-so.github.io/No-Framework-VanillaJS/">👀 눈으로 확인하기</a>
+  <h2>
+</div>
 
 <br>
 
-## 웹 프레임워크 구성을 따라가기
-1. 렌더링
-   - DOM을 효과적으로 조작하기
-   - 가상 DOM 구현하기
-   - diff 알고리즘 작성하기
-   - reflow, repaint, composite를 고려한 DOM 핸들링
-
-<br>
-
-2. DOM 이벤트 관리
-   - 이벤트 버블링
-   - 이벤트 캡처링
-   - 이벤트 위임
-
-<br>
-
-3. 컴포넌트 제어
-   - 커스텀 엘리먼트 사용
-   - 상태 관리하기
-
-<br>
-
-4. HTTP 클라이언트 구현
-   - XmlHttpRequest
-   - fetch API
-   - *(옵션) Axios*
-
-<br>
-
-5. 라우팅 제어
-   - Fragment
-   - History API
-
-<br>
-
-6. 비동기 함수의 효율적인 구성
-   - 에러 처리
-   - callback, Promise, async/await 패턴
-   - generator, yield
-
-<br>
-
-7. 미들웨어 구성
-   - 어떻게 하면 특정 이벤트를 갈취할 수 있을까?
-
-<br>
-
-8. 디자인, 소프트웨어 아키텍처 패턴 적용
-   - MVC
-   - MVVM
-   - Flux
-   - *(옵션) 이벤트 기반 마이크로서비스 아키텍처 패턴*
-
-<br>
-
-9. 단위 테스트 적용
-   - jest
-   - cypress
-
-<br>
-
-## 구현하기
-### DOM
-- [ ] 이벤트 핸들링(위임, 캡처링, 버블링) 최적화
-- [ ] 제어 최적화(선택자, 내용 삽입 등)
-
-<br>
-
-### 상태관리
-- [ ] vuex
-- [ ] redux
-- [ ] redux-saga
-
-<br>
-
-### 컴포넌트
-- [ ] custom-element
-- [ ] shadow-dom
-- [ ] observable
-
-<br>
-
-### 빌드
-- [ ] webpack, code-splitting
-
-<br>
-
-### 라우팅
-- [ ] route module
-
-<br>
-
-### 클라이언트
-- [ ] http client module
-
-<br>
-
-### 패턴
-- [ ] 패턴의 장/단점에 따라 설계하고 구축하기
-
-<br>
-
-## 보일러 플레이트
-> 프로젝트 설계 시 나만의 구조 짜기
-
-```
-├─__test__
-│       * 테스트 단위별 폴더로 구성하고
-|         파일 명은 *.spec.js
-│
-├─.vscode
-│       * 코드 스니펫 저장해두기
-|         javascript.json.code-snippets
-│
-├─asset
-│  │
-│  ├─css
-│  │    * 앱이 간단하다면 단일 파일, 복잡성이 높다면 분리
-│  │      app.css
-│  │      reset.css(또는 normalized.css)
-│  │
-│  ├─fonts
-│  │      * 폰트가 있는 경우
-│  │
-│  └─images
-│          404.png
-│          main.jpg
-│
-├─src
-│  │  App.js
-│  │
-│  ├─api
-│  │      * API 정보 구성, http-client도 같이 구성한다.
-│  │
-│  ├─components
-│  │      * 컴포넌트 구성, 컴포넌트는 store와 utils에 의존한다.
-│  │
-│  ├─constants
-│  │      * 상수로 각종 정보 구성하기
-│  │
-│  ├─events
-│  │      * 이벤트 함수 정의, 컴포넌트는 evetns에 의존한다.
-│  │
-│  ├─routes
-│  │      * 라우팅 관련 기능 정의
-│  │
-│  ├─store
-│  │      * 상태 관리 패턴 다루기
-│  │
-│  └─utils
-│         * 공통 함수 정의
-│
-│  .babelrc.js
-│  .eslintrc.js
-│  favicon.ico
-│  index.html
-│  index.js
-│  jest.config.js
-│  jsconfig.json
-│  package.json
-│  pages.pdf
-│  README.md
-│  webpack.config.js
-```
-
-- 공통적으로 ESLinter/Prettier를 적용한다.
-- 성질이 비슷하면 묶고, 의존성은 최대한 약하게 구성한다.
-- 상태 관리를 적극적으로 활용한다. flux를 기반으로 작성하지만, MVC로는 어떻게 구성할 수 있는지도 고려한다.
-- 상태 관리가 익숙해지면 불변성(Immutable)을 깨지 않고 작성한다.
-
-<br>
-
-## `[`**참고**`]` 프로젝트에 들어가기 앞서
+## ✋ `[`**참고**`]` 프로젝트에 들어가기 앞서
 
 <details><summary><strong>자세히보기</strong></summary>
 
@@ -291,7 +113,7 @@
 <br>
 <hr>
 
-## 바르게 유지되는 코드란 무엇인가?
+### 바르게 유지되는 코드란 무엇인가?
 > "와, 이건 새로 만드는게 정신 건강에 좋고... 미래를 위해서도 나을 것 같아요😭"
 
 방대한 레거시 코드를 보면 한숨이 나오고, 욕지거리가 목에 맴돕니다. 아무리 완벽한 프로그램이라도 유지보수를 몇 년 거치면 괴물이 탄생합니다. 이를 해결하기 위해서 어떻게 해야 할까요?
@@ -423,15 +245,103 @@ TDD를 실천하면 첫째, 작은 코드는 대개 간단하고 실수할 가�
 <br>
 <hr>
 
-## 참조
+### 참조
 - 자바스크립트 : 자바스크립트 패턴과 디자인
 - 이벤트 기반 마이크로서비스 구축
 - 함수형 자바스크립트
 - 이펙티브 타입스크립트
 
+</details>
+
+<hr>
 <br>
 
-</details>
+해당 저장소는 바닐라 자바스크립트를 적극적으로 활용하기 위해 관리하며, 구현 대상은 각종 프론트엔드 라이브러리와 프레임워크입니다.
+
+설치하는 npm 패키지는 오로지 **ESLint/Prettier**, **TypeScript**, **Test Library**입니다(간혹 `axios`를 사용할 순 있습니다).
+
+<br>
+
+## 🙋‍♂️ 바닐라 자바스크립트로 구현을 한다는 것은?
+1️⃣ 프레임워크는 무엇이고, 라이브러리는 무엇인지 명확하게 알아야 합니다.
+
+2️⃣ 제약사항과 기술적 부채를 어디서 접근하고 어떻게 해결해야 할까요? 
+
+3️⃣ 개발 트렌드에 따른 구현 형태는 어떻게 될까요?
+
+4️⃣ 이 모든 걸 구현했다면 **타입스크립트(TypeScript)** 로 만듭시다.
+
+<br>
+
+## 🏃 웹 프레임워크 구성을 따라가기
+### 🐡 컴포넌트
+- Web Component
+- Class Component
+- Functional Component
+
+<br>
+
+### 🐠 상태 관리
+- Local Storage
+- Redux
+- Vuex
+
+<br>
+
+### 🐟 이벤트
+- Event Handler Attribute
+- Event Handler Property
+- EventTarget.prototype.addEventListener
+- Bubbling
+- Capturing
+- Delegation
+
+<br>
+
+### 🐬 라우트
+- Hash Fragment
+- History API
+
+<br>
+
+### 🐳 HTTP 요청
+- XMLHttpRequest
+- fetch API
+
+<br>
+
+### 🐋 소프트웨어 패턴
+- Gang Of Four(GOF)
+- mvc
+- mvvm
+- flux
+
+<br>
+
+### 🦈 함수형 프로그래밍
+- Closure, High-Order Function
+- Functional Array
+- Currying
+- Composition, Pipe-line
+- Functor
+- Monad
+- Generator
+
+<br>
+
+### 🐊 기타
+- Diff Algorithm
+- Promise
+- Micro Task
+- React Hooks
+- Immutability
+
+<br>
+
+## 연관 저장소
+☑️ [IT-Note](https://github.com/InSeong-So/IT-Note) : 개발에 필요한 기초/기술 전반에 대한 내용을 기록한 저장소
+☑️ [Frontend-Vanilla](https://github.com/InSeong-So/Frontend-Vanilla) : 바닐라 자바스크립트로 만든 기능으로 작성한 템플릿 저장소
+☑️ [Frontend-React](https://github.com/InSeong-So/Frontend-React) : React, TypeScript, Emotion, Storybook으로 작성한 템플릿 저장소
 
 <br>
 <hr>
