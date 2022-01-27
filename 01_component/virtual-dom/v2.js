@@ -1,8 +1,7 @@
 const nativeCreate = document.createElement.bind(document);
 document.createElement = createElement;
 
-document.createElement[Symbol.toPrimitive] = () =>
-  'function createElement() { [native code] }';
+document.createElement[Symbol.toPrimitive] = () => 'function createElement() { [native code] }';
 
 function createElement(name, attributes, ...children) {
   attributes = attributes || {};
@@ -13,17 +12,13 @@ function createElement(name, attributes, ...children) {
 
   // content attributes vs IDL attributes have many cases
   Object.entries(attributes).forEach(([name, value]) =>
-    name.startsWith('on')
-      ? (element[name] = value)
-      : element.setAttribute(name, value),
+    name.startsWith('on') ? (element[name] = value) : element.setAttribute(name, value),
   );
 
   children
     .filter(child => !(child == null || child == undefined))
     .forEach(child =>
-      element.appendChild(
-        child instanceof Node ? child : document.createTextNode(child),
-      ),
+      element.appendChild(child instanceof Node ? child : document.createTextNode(child)),
     );
 
   return element;
@@ -40,4 +35,4 @@ const el = document.createElement(
   ' wow ',
   document.createElement('button', { onclick: () => alert(1) }, 'say'),
 );
-onload = () => document.querySelector('.app').appendChild(el);
+onload = () => document.querySelector('.v2').appendChild(el);

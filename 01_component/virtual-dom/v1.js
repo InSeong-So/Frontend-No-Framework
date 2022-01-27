@@ -1,6 +1,7 @@
 import htmlParser from './src/parser/index.js';
 
-const $app = document.querySelector('.app');
+const $app = document.querySelector('.v1');
+const $main = document.querySelector('main');
 const realDOM = htmlParser($app.innerHTML);
 const virtualDOM = htmlParser(`
 <div class="d-flex justify-center mt-5 w-100">
@@ -27,4 +28,9 @@ const showValues = sports => {
   }
 };
 
-showValues(realDOM);
+// 실행
+const $pre = document.createElement('pre');
+$pre.textContent = JSON.stringify(realDOM, null, 2);
+$main.append($pre);
+
+showValues(virtualDOM); // 콘솔을 확인해주세요!
