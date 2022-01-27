@@ -1,0 +1,41 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "strict": true,
+    "sourceMap": true,
+    "useDefineForClassFields": true,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "types": ["node"],
+    "paths": {
+      "~/*": [
+        "*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+    },
+    "typeRoots": [
+      "src/types"
+    ]
+  },
+}
