@@ -1,23 +1,24 @@
-import { takeEvery, call, put, runSaga } from './src/index.js';
-import counter from './src/lib/counter.js';
+import { takeEvery, runSaga } from './src/index.js';
 import createStore from './src/createStore.js';
+import createRequestSaga from './src/createRequestSaga.js';
+import counter from './src/lib/counter.js';
 import { getUser } from './src/lib/api.js';
 
 const store = createStore(counter);
 
-function* incrementSaga() {
-  const user = yield call(getUser, 1);
-  yield put({ type: 'INCREMENT_SUCCESS', data: user });
-}
+const params = { id: 1 };
 
-function* decrementSaga() {
-  const user = yield call(getUser, 1);
-  yield put({ type: 'DECREMENT_SUCCESS', data: user });
-}
+const increment = createRequestSaga('INCREMENT', getUser, params);
+const decrement = createRequestSaga('DECREMENT', getUser, params);
 
 function* mySaga() {
-  yield* takeEvery('INCREMENT_REQUEST', incrementSaga);
-  yield* takeEvery('DECREMENT_REQUEST', decrementSaga);
+  yield* takeEvery('INCREMENT_REQUEST', increment);
+  yield* takeEvery('DECREMENT_REQUEST', decrement);
+}
+
+function* useSaga() {
+  yield* takeEvery('INCREMENT_REQUEST', increment);
+  yield* takeEvery('DECREMENT_REQUEST', decrement);
 }
 
 runSaga(store, mySaga);

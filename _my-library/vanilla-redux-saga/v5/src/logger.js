@@ -1,4 +1,5 @@
 export const logEffect = effect => {
+  console.log(effect);
   let effectInfo;
   switch (effect.type) {
     case 'fork':

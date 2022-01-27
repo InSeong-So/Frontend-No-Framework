@@ -5,22 +5,20 @@ export const createRequestActionType = action => {
   return [ACTION, `${ACTION}_SUCCESS`, `${ACTION}_FAILURE`];
 };
 
-const createRequestSaga = (type, request) => {
+const createRequestSaga = (type, request, params) => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
-
-  return function* (action) {
+  return function* () {
     try {
-      const response = yield call(request, action.payload);
+      const data = yield call(request, params);
       yield put({
         type: SUCCESS,
-        payload: response.data,
-        meta: response,
+        data: data,
       });
     } catch (error) {
       yield put({
         type: FAILURE,
-        payload: error,
+        data: error,
         error: true,
       });
     }
