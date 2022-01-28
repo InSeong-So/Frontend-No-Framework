@@ -275,66 +275,127 @@ TDD를 실천하면 첫째, 작은 코드는 대개 간단하고 실수할 가�
 
 ## 🏃 웹 프레임워크 구성을 따라가기
 ### 🐡 컴포넌트
-- Web Component
-- Class Component
-- Functional Component
+**🎆 Virtual DOM**
+- 개념 : 가상 DOM은 실제 DOM의 내부 메모리 표현으로, 수정된 UI를 메모리에 보관하여 실제 DOM과 동기화하기 위함입니다.
+
+- 구현 : `document.createElement` API로는 많은 엘리먼트를 생성할 때 코드가 복잡해지고 가독성이 떨어지는 단점이 있습니다. 따라서 ES5의 `Template literal`을 사용하여 가상 DOM을 구현하려고 했습니다. 현재는 string을 분석하여 엘리먼트 객체를 만들며 차후 웹 컴포넌트와 결합해 효율적인 가상 DOM을 확장합니다.
+
+- > 참조 : [Virtual DOM과 Internals](https://ko.reactjs.org/docs/faq-internals.html)
+
+<br>
+
+**🎆 Shadow DOM**
+- 개념 : 웹 컴포넌트의 CSS와 변수의 범위를 지정하기 위해 설계된 브라우저 API입니다.
+
+- 구현 : 웹 컴포넌트의 `this.attachShadow({ mode: 'closed' });`를 사용하여 구현합니다. 그러나 외부 CSS와 변수에 폐쇄적이게 되므로 외부 환경과 격리시키기 위한 컴포넌트를 제작할 때 사용합니다. 예로 타이머가 있겠네요.
+
+- > 참조 : [shadow DOM 사용하기](https://developer.mozilla.org/ko/docs/Web/Web_Components/Using_shadow_DOM)
+
+<br>
+
+**🎆 Web Component**
+- 개념 : HTML이 기본으로 제공하는 엘리먼트는 브라우저와 운영체에제 따라 다르게 보이는 경우도 있고, 더 발전하는 웹 환경에 대응하기에 한계가 있습니다. 이런 한계를 JavaScript 컴포넌트로 보완하고 있습니다. 그러나 JavaScript 컴포넌트는 사용이 어려울 뿐만 아니라 크기가 커서 실행 속도가 느립니다. W3C(World Wide Web Consortium)에서는 이러한 문제를 개선하고자 웹 컴포넌트(Web Component)라는 명세(Specification)를 만들었습니다.
+
+- 구현 : 브라우저의 `HTMLElement`를 상속받아 클래스 형태로 컴포넌트를 작성합니다. 자체적으로 observable한 `attributeChangedCallback`와 mount/unmoun와 비슷한 `connectedCallback` 및 `disconnectedCallback`, `adoptedCallback` 메서드 등을 지원하므로 효율적인 라이프 사이클 메서드를 구현할 수 있습니다.
+
+- > 참조 : [React.Component](https://ko.reactjs.org/docs/react-component.html) | [웹 컴포넌트](https://d2.naver.com/helloworld/188655)
+
+<br>
+
+**🎆 Class Component**
+- 개념 : class로 정의된 컴포넌트로 생명주기 메서드를 가집니다. 이 메서드를 오버라이딩하여 특정 시점에 코드를 실행할 수 있습니다.
+
+- 구현 : 템플릿 패턴을 사용하여 렌더링, 이벤트 바인딩, 의존성 주입을 활용할 수 있습니다.
+
+- > 참조 : [생명주기 도표](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
+
+<br>
+
+**🎆 Functional Component**
+- 개념 : 함수로 선언된 컴포넌트로 부수 효과(Side Effect)를 최소화하기 좋은 컴포넌트 구현 방법입니다.
+
+- 구현 : View와 Event를 분리하여 작성해봅니다. 또한 바인딩된 이벤트의 내부 state가 클로저에 갖히므로 외부에서 변경되는 상태를 어떻게 주입할 지가 관건입니다.
+
+- > 참조 : [Components와 Props](https://ko.reactjs.org/docs/components-and-props.html)
 
 <br>
 
 ### 🐠 상태 관리
-- Local Storage
-- Redux
-- Vuex
+**🎆 Local Storage**
+
+**🎆 Redux**
+
+**🎆 Vuex**
 
 <br>
 
 ### 🐟 이벤트
-- Event Handler Attribute
-- Event Handler Property
-- EventTarget.prototype.addEventListener
-- Bubbling
-- Capturing
-- Delegation
+**🎆Event Handler Attribute**
+
+**🎆Event Handler Property**
+
+**🎆EventTarget.prototype.addEventListener**
+
+**🎆Bubbling**
+
+**🎆Capturing**
+
+**🎆Delegation**
 
 <br>
 
 ### 🐬 라우트
-- Hash Fragment
-- History API
+**🎆 Hash Fragment**
+
+**🎆 History API**
 
 <br>
 
 ### 🐳 HTTP 요청
-- XMLHttpRequest
-- fetch API
+**🎆 XMLHttpRequest**
+
+**🎆 fetch API**
 
 <br>
 
 ### 🐋 소프트웨어 패턴
-- Gang Of Four(GOF)
-- mvc
-- mvvm
-- flux
+**🎆 Gang Of Four(GOF)**
+
+**🎆 mvc**
+
+**🎆 mvvm**
+
+**🎆 flux**
 
 <br>
 
 ### 🦈 함수형 프로그래밍
-- Closure, High-Order Function
-- Functional Array
-- Currying
-- Composition, Pipe-line
-- Functor
-- Monad
-- Generator
+**🎆 Closure, High-Order Function**
+
+**🎆 Functional Array**
+
+**🎆 Currying**
+
+**🎆 Composition, Pipe-line**
+
+**🎆 Functor**
+
+**🎆 Monad**
+
+**🎆 Generator**
 
 <br>
 
 ### 🐊 기타
-- Diff Algorithm
-- Promise
-- Micro Task
-- React Hooks
-- Immutability
+**🎆 Diff Algorithm**
+
+**🎆 Promise**
+
+**🎆 Micro Task**
+
+**🎆 React Hooks**
+
+**🎆 Immutability**
 
 <br>
 
