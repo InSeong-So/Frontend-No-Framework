@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "바닐라 자바스크립트로 기능 구현하기",
   "scripts": {
+    "build": "tsc",
     "test": "tsc && webpack && cypress run --browser chrome"
   },
   "repository": {
@@ -25,6 +26,13 @@
     "url": "https://github.com/InSeong-So/No-Framework-VanillaJS/issues"
   },
   "homepage": "https://github.com/InSeong-So/No-Framework-VanillaJS#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "redux": "^4.1.2",
+    "immer": "^9.0.7",
+    "history": "^4.10.1",
+    "@types/history": "^4.7.11"
+  },
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.12",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
@@ -37,6 +45,7 @@
     "jest": "27.4.7",
     "jest-plugin-context": "2.9.0",
     "prettier": "^2.5.1",
+    "reflect-metadata": "^0.1.13",
     "typescript": "^4.5.5"
   }
 }
