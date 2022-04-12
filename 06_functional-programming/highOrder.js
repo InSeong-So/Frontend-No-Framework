@@ -57,3 +57,19 @@ export const partial =
   };
 
 export const compose = (a, b) => c => a(b(c));
+
+// TODO: refactoring
+export const pipe =
+  (...fns) =>
+  value =>
+    fns.reduce((value, fn) => fn(value), value);
+
+export const groupBy = (array = [], key = '') =>
+  array.reduce((result, value) => {
+    if (result[value[key]] === undefined) {
+      result[value[key]] = [value];
+    } else {
+      result[value[key]].push(value);
+    }
+    return result;
+  }, {});
