@@ -1,19 +1,29 @@
-const timer = ms => new Promise(res => setTimeout(res, ms));
+// const timer = ms => new Promise(res => setTimeout(res, ms));
 
-async function load() {
-  let i = 5;
-  while (i > 0) {
-    console.log(i);
-    await timer(1000);
-    i--;
-  }
-  console.log('end');
-}
+// async function load() {
+//   let i = 5;
+//   while (i > 0) {
+//     console.log(i);
+//     await timer(1000);
+//     i--;
+//   }
+//   console.log('end');
+// }
 
-// load();
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const delayLoop = (limit = 0) => {
+  return async () => {
+    for (let index = 0; index < limit; index++) {
+      console.log(index);
+      await delay(1000);
+    }
+    console.log('end');
+  };
+};
 
 const $intervalButton = document.getElementById('interval-button');
-$intervalButton.addEventListener('click', () => window.requestAnimationFrame(load));
+$intervalButton.addEventListener('click', () => window.requestAnimationFrame(delayLoop(5)));
 
 // !(function () {
 //   let start = new Date().getTime();
